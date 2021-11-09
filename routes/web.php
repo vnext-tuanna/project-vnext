@@ -24,7 +24,24 @@ Route::group(['middleware' => 'guest'], function () {
 
     Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
 });
-
+Route::get('/dashboard', function () {
+    return view('admin.home');
+});
+Route::get('/report', function () {
+    return view('admin.report');
+});
+Route::get('/request', function () {
+    return view('admin.request');
+});
+Route::get('/division', function () {
+    return view('admin.division');
+});
+Route::get('/skill', function () {
+    return view('admin.skill');
+});
+Route::get('/user', function () {
+    return view('admin.user');
+});
 ###################
 # AUTH
 ###################
