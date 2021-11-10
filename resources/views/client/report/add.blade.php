@@ -7,14 +7,15 @@
             <h4>Report</h4>
             <hr>
         </div>
-        <form action="">
+        <form action="" method="POST">
+            @csrf
             <div class="form-group mt-3">
                 <label for="">Title</label>
                 <input type="text" class="form-control">
             </div>
             <div class="form-group mt-3">
-                <label for="">Content</label>
-                <textarea id="description"></textarea>
+                <label><strong>Description :</strong></label>
+                <textarea class="ckeditor form-control" name="description"></textarea>
             </div>
             <button class="btn  mt-3" style="background-color: #0a3d62; color: white">Send Report</button>
         </form>
@@ -22,11 +23,10 @@
 
 @endsection
 @push('js')
-    <script src="{{ asset('client/js/CKEditor.js') }}"></script>
-@endpush
-@push('script')
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#description' ))
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ckeditor').ckeditor();
+        });
     </script>
 @endpush

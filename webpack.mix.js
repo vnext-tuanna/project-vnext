@@ -12,10 +12,13 @@ const mix = require('laravel-mix');
  */
 const publicCssFolder = 'public/css';
 const publicJsFolder = 'public/js';
+const clientCss = 'public/client/css'
 const publicFontFolder = 'public/fonts';
 
 mix.js('resources/js/app.js', publicJsFolder)
-    .sass('resources/scss/app.scss', publicCssFolder);
+    .js('resources/js/CKeditor.js', publicJsFolder)
+    .css('resources/css/style.css', clientCss)
+    .sass('resources/scss/app.scss', publicCssFolder)
 
 
 mix.options({
