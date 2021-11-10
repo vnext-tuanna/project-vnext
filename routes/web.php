@@ -42,6 +42,10 @@ Route::get('/skill', function () {
 Route::get('/user', function () {
     return view('admin.user');
 });
+
+
+
+
 ###################
-# AUTH
+# client
 ###################

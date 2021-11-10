@@ -4,14 +4,14 @@
     <div class="section__user">
         <div class="section__user__content">
             <div class="content__head">
-                <h4><i class="bi bi-person-bounding-box"></i>User</h4>
+                <h4>User</h4>
             </div>
             <div class="content-body row">
                 <div class="col-md-6 col-xl-3 ">
                         <div class="user-info  p-3 ">
                         <div class="d-flex content__title">
                             <div class="flex-shrink-0 image">
-                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">
+{{--                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">--}}
                             </div>
                             <div class="flex-grow-0 ms-3 name">
                                 <span class=" fs-4 fw-bold">Luca Doncic</span>
@@ -42,7 +42,7 @@
                     <div class="user-info  p-3 ">
                         <div class="d-flex content__title">
                             <div class="flex-shrink-0 image">
-                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">
+{{--                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">--}}
                             </div>
                             <div class="flex-grow-0 ms-3 name">
                                 <span class=" fs-4 fw-bold">Luca Doncic</span>
@@ -73,7 +73,7 @@
                     <div class="user-info  p-3 ">
                         <div class="d-flex content__title">
                             <div class="flex-shrink-0 image">
-                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">
+{{--                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">--}}
                             </div>
                             <div class="flex-grow-0 ms-3 name">
                                 <span class=" fs-4 fw-bold">Luca Doncic</span>
@@ -104,7 +104,7 @@
                     <div class="user-info  p-3 ">
                         <div class="d-flex content__title">
                             <div class="flex-shrink-0 image">
-                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">
+{{--                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">--}}
                             </div>
                             <div class="flex-grow-0 ms-3 name">
                                 <span class=" fs-4 fw-bold">Luca Doncic</span>

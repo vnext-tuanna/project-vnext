@@ -1,8 +1,7 @@
 @extends('layouts.app')
-@push('style')
+@push('css')
     <link rel="stylesheet" href="{{asset('client/css/datatable.min.css')}}">
 @endpush
-
 @section('content')
     <div class="section__main">
         <div class="section__main__body row">

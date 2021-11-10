@@ -21,9 +21,9 @@
 
     <!-- CSS head -->
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+
     @stack('css')
     @stack('style')
-
     <!-- JS head -->
     @stack('script-head')
     @stack('js-head')
