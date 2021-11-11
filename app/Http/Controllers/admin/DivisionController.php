@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Services\DivisionService;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class DivisionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.division.create');
     }
 
     /**
@@ -41,7 +41,8 @@ class DivisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->divisionService->store($request->all());
+        return redirect('admin/divisions');
     }
 
     /**
@@ -63,7 +64,8 @@ class DivisionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $divisions = $this->divisionService->getDivisionById($id);
+        return view('admin.division.edit', compact('divisions'));
     }
 
     /**
@@ -75,7 +77,8 @@ class DivisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->divisionService->update($id, $request->all());
+        return redirect('admin/divisions');
     }
 
     /**
@@ -86,6 +89,7 @@ class DivisionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->divisionService->delete($id);
+        return redirect('admin/divisions');
     }
 }

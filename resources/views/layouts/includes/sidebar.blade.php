@@ -39,6 +39,12 @@
             </a>
         </li>
         <li>
+            <a href="/admin/positions" class="<?=$path_url == 'admin/positions' ? 'active' : ''?>">
+                <i class="fas fa-book-open"></i>
+                <span class="links_name">Position</span>
+            </a>
+        </li>
+        <li>
             <a href="/admin/skills" class="<?=$path_url == 'admin/skills' ? 'active' : ''?>">
                 <i class="fas fa-book-open"></i>
                 <span class="links_name">Skill</span>

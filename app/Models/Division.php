@@ -12,6 +12,6 @@ class Division extends Model
     protected $fillable = ['name'];
     public function users()
     {
-        return $this->hasMany(User::class, 'division_id', 'id');
+        return $this->hasMany(User::class, 'user_id', 'id');
     }
 }

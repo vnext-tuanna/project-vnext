@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
     public function reports()
     {
-        return $this->hasMany(Report::class, 'user_id');
+        return $this->hasMany(Report::class, 'user_id')->withTrashed();
     }
     public function division()
     {
@@ -69,11 +69,11 @@ class User extends Authenticatable
     }
     public function position()
     {
-        return $this->belongsTo(Position::class);
+        return $this->belongsTo(Position::class)->withTrashed();
     }
     public function skills()
     {
-        return $this->belongsToMany(Skill::class, 'user_skills', 'user_id', 'skill_id');
+        return $this->belongsToMany(Skill::class, 'user_skills', 'user_id', 'skill_id')->withTrashed();
     }
     public function userskills()
     {
