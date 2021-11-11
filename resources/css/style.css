@@ -22,6 +22,10 @@ body {
 ::after {
     box-sizing: border-box
 }
+.error{
+    color: red;
+    margin: 10px 0 0 10px !important;
+}
 
 #body-pd {
     position: relative;
@@ -286,4 +290,7 @@ main {
 .user-info .menu__link li:hover, .user-info .menu__link li:hover a{
     background-color: #1a202c;
     color: #FFFFFF;
+}
+::placeholder{
+    color: red !important;
 }
