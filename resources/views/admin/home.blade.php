@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard',['name'=>'Dashboard'])
 
 @section('content')
 <div class="overview-boxes">

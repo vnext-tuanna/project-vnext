@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class Request extends Model
 {
     use HasFactory;
-    protected $table = 'reports';
+    use SoftDeletes;
+    protected $table = 'requests';
+    protected $fillable = ['status'];
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();

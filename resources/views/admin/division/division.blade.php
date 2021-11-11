@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard',['name'=>'Division'])
 
 @section('content')
     <div class="container">
@@ -15,9 +15,10 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($divisions as $divisions)
                 <tr>
-                    <td>Tiger1</td>
-                    <td>Edinburgh</td>
+                    <td>{{ $divisions->id }}</td>
+                    <td>{{ $divisions->name }}</td>
                     <td>
                         <ul class="list-inline m-0">
                             <li class="list-inline-item">
@@ -29,6 +30,8 @@
                         </ul>
                     </td>
                 </tr>
+                @endforeach
+                
             </tbody>
         </table>
     </div>
