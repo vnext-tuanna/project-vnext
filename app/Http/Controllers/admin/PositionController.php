@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Services\PositionService;
 use Illuminate\Http\Request;
 
 class PositionController extends Controller
@@ -11,9 +12,15 @@ class PositionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $positionService;
+    public function __construct(PositionService $positionService)
+    {
+        $this->positionService = $positionService;
+    }
     public function index()
     {
-        //
+        $positions = $this->positionService->getAllPositions();
+        return view('admin.position.position', compact('positions'));
     }
 
     /**
@@ -23,7 +30,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.position.create');
     }
 
     /**
@@ -34,7 +41,8 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->positionService->store($request->all());
+        return redirect('admin/positions');
     }
 
     /**
@@ -56,7 +64,8 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $positions = $this->positionService->getPositionsById($id);
+        return view('admin.position.edit', compact('positions'));
     }
 
     /**
@@ -68,7 +77,8 @@ class PositionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->positionService->update($id, $request->all());
+        return redirect('admin/positions');
     }
 
     /**
@@ -79,6 +89,7 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->positionService->delete($id);
+        return redirect('admin/positions');
     }
 }

@@ -14,7 +14,7 @@ class Skill extends Model
     protected $fillable = ['name'];
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_skills', 'user_id', 'skill_id');
+        return $this->belongsToMany(User::class, 'user_skills', 'user_id', 'skill_id')->withTrashed();
     }
     public function userskill()
     {

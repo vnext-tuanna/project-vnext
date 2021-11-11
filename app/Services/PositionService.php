@@ -23,4 +23,21 @@ class PositionService extends BaseService
     {
         return $this->positionRepository->all();
     }
+    public function store($id)
+    {
+        return $this->positionRepository->create($id);
+    }
+    public function getPositionsById($id)
+    {
+        return $this->positionRepository->find($id);
+    }
+    public function update($data, $id)
+    {
+        $positions = $this->positionRepository->find($id);
+        return $positions->update($data);
+    }
+    public function delete($id)
+    {
+        return $this->positionRepository->delete($id);
+    }
 }
