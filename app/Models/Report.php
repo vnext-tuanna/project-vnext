@@ -9,8 +9,13 @@ class Report extends Model
 {
     use HasFactory;
     protected $table = 'reports';
-    public function user()
-    {
-        return $this->belongsTo(User::class)->withTrashed();
-    }
+// <<<<<<< feat/report
+
+// //     public $fillable = [ 'description', 'user_id', 'title'];
+// // =======
+// //     public function user()
+// //     {
+// //         return $this->belongsTo(User::class)->withTrashed();
+// //     }
+// >>>>>>> develop
 }

@@ -1,9 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\Auth\LoginFormController;
 use App\Http\Controllers\Auth\LogoutController;
-use \App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Auth\AuthenticateController;
 
 Route::get('/', function () {
     return view('client.login');
@@ -31,6 +31,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/homepage', function () {
         return view('client.index');
     })->name('index');
-    Route::get('/report', [ReportController::class, 'create'])->name('report.add');
-    Route::post('/report', [ReportController::class, 'store']);
+    Route::resource('report', ReportController::class);
 });

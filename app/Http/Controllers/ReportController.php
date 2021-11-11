@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReportRequest;
 use App\Models\Report;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -15,7 +16,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        $reports = Report::where('user_id', Auth::id())->get();
+        return view('client.report.index', compact('reports'));
     }
 
     /**
@@ -34,14 +36,17 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReportRequest $request)
     {
+        $request->validated();
         $modal = new Report();
-        dd($request->all());
-        $request->all();
-
-        $modal->fill($request->all());
-        dd($modal);
+        $data = [
+          'user_id' => Auth::id(),
+          'description' => $request->description,
+          'title' => $request->title,
+        ];
+        $modal->fill($data)->save();
+        return redirect('report');
     }
 
     /**
@@ -52,7 +57,8 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        //
+        $report = Report::find($id);
+        return view('client.report.detail', compact('report'));
     }
 
     /**
@@ -63,7 +69,8 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-        //
+        $report = Report::find($id);
+        return view('client.report.update', compact('report'));
     }
 
     /**
@@ -75,7 +82,14 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $modal = Report::find($id);
+        $data = [
+            'user_id' => Auth::id(),
+            'description' => $request->description,
+            'title' => $request->title,
+        ];
+        $modal->fill($data)->save();
+        return redirect('report');
     }
 
     /**
@@ -86,6 +100,5 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }
