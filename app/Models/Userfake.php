@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Model
 {
+    use HasFactory;
     const ROLE = ['1' => 'Admin', '2' => 'Manager', '3' => 'Staff'];
 
-    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,14 +23,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'image',
-        'position_id',
-        'division_id',
-        'follow_id',
-        'role',
         'password',
-        'provider',
-        'provider_id',
+        'role',
         'division_id',
         'position_id',
         'skill_id',

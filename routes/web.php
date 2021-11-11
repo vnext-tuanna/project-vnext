@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\admin\DivisionController;
+use App\Http\Controllers\admin\PositionController;
+use App\Http\Controllers\admin\ReportController;
+use App\Http\Controllers\admin\RequestController;
+use App\Http\Controllers\admin\SkillController;
+use App\Http\Controllers\admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,31 +23,22 @@ use Illuminate\Support\Facades\Route;
 # GUEST
 ###################
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', function () {
-        return view('home');
-    });
 
-    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('dashboard', function () {
+        return view('admin.home');
+    });
+    Route::resource('users', UserController::class);
+    Route::resource('reports', ReportController::class);
+    Route::get('waiting', [RequestController::class, 'getWaitingRequest']);
+    Route::get('approve/{id}', [RequestController::class, 'approveWRequest']);
+    Route::get('deny/{id}', [RequestController::class, 'denyWRequest']);
+    Route::resource('requests', RequestController::class);
+    Route::resource('divisions', DivisionController::class);
+    Route::resource('positions', PositionController::class);
+    Route::resource('skills', SkillController::class);
 });
-Route::get('/dashboard', function () {
-    return view('admin.home');
-});
-Route::get('/report', function () {
-    return view('admin.report');
-});
-Route::get('/request', function () {
-    return view('admin.request');
-});
-Route::get('/division', function () {
-    return view('admin.division');
-});
-Route::get('/skill', function () {
-    return view('admin.skill');
-});
-Route::get('/user', function () {
-    return view('admin.user');
-});
+
 
 
 
