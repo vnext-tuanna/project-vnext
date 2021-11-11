@@ -11,7 +11,7 @@
     <meta name="app.lang" content="{{ config('app.locale')  }}">
     <meta name="robots" content="index,follow"/>
     <meta name="revisit-after" content="1 days">
-    <title>Laravel </title>
+    <title>Laravel</title>
     <meta name="title" content="Laravel"/>
     <meta name="description" content="Laravel"/>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">

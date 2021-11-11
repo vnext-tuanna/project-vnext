@@ -1,7 +1,10 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard',['name'=>'Request'])
 
 @section('content')
     <div class="container">
+      <div class="btn-option">
+        <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
+      </div> 
         <table
             id="example"
             class="table table-striped table-bordered dt-responsive nowrap"
@@ -10,20 +13,23 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Fullname</th>
+                    <th>Type</th>
                     <th>Content</th>
-                    <th>Time</th>
-                    <th>Option</th>
+                    <th>From_user</th>
+                    <th>To_user</th>
+                    <th>Start_date</th>
+                    <th>End_date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Tiger1</td>
-                    <td>Nixon</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur magni illo quisquam in soluta. Veniam facere doloribus odit blanditiis suscipit beatae distinctio quasi minima laboriosam necessitatibus, natus recusandae illo voluptas.
-                      </p>
+              @foreach ($requests as $requests)
+              <tr>
+                <td>{{ $requests->id }}</td>
+                <td>{{ $requests->type }}</td>
+                <td>
+                    <p>
+                      {{ $requests->content }}
+                    </p>
                     <a href="# " id="myBtn" data-toggle="modal" data-target="#staticBackdrop">Chi tiết</a>
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog">
@@ -35,7 +41,7 @@
                             </button>
                           </div>
                           <div class="modal-body">
-                            ...Contentttttttttt
+                            {{ $requests->content }}
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -43,19 +49,14 @@
                         </div>
                       </div>
                     </div>
-                    </td>
-                    <td>Edinburgh</td>
-                    <td style="padding-top: 20px;">
-                      <ul class="list-inline m-0">
-                        <li class="list-inline-item">
-                          <button class="btn btn-primary btn-sm rounded" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
-                        </li>
-                        <li class="list-inline-item">
-                          <button class="btn btn-secondary btn-sm rounded" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
-                        </li>             
-                      </ul>
-                    </td>
-                </tr>
+                  </td>
+                <td>{{ $requests->user->name }}</td>
+                <td>{{ $requests->user->to_user_id }}</td>
+                <td>{{ $requests->start_date }}</td>
+                <td>{{ $requests->end_date }}</td>
+            </tr>
+              @endforeach
+               
             </tbody>
         </table>
     </div>
