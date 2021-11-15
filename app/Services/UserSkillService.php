@@ -23,4 +23,8 @@ class UserSkillService extends BaseService
     {
         return $this->userskillRepository->where('user_id', $id)->get();
     }
+    public function getAllSkillManager($id)
+    {
+        return $this->userskillRepository->with('manager')->where('manager_id', $id)->get();
+    }
 }

@@ -27,31 +27,33 @@
                 <td>{{ $requests->id }}</td>
                 <td>{{ $requests->type }}</td>
                 <td>
-                    <p>
+                    <p id = "text_content">
                       {{ $requests->content }}
                     </p>
-                    <a href="# " id="myBtn" data-toggle="modal" data-target="#staticBackdrop">Chi tiết</a>
-                    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Content</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            {{ $requests->content }}
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{ $requests->id }}" id="details" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $requests->id }}">
+                          Details
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop{{ $requests->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Content</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <p class="content_request">{{ $requests->content }}</p>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
                   </td>
                 <td>{{ $requests->user->name }}</td>
-                <td>{{ $requests->user->to_user_id }}</td>
+                <td>{{ $requests->manager->name }}</td>
                 <td>{{ $requests->start_date }}</td>
                 <td>{{ $requests->end_date }}</td>
             </tr>

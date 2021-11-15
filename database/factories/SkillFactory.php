@@ -23,7 +23,6 @@ class SkillFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'user_id' => $this->faker->numberBetween($min = 1, $max = 20),
         ];
     }
 }

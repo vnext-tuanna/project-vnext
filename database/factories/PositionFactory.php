@@ -23,7 +23,6 @@ class PositionFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'division_id' => $this->faker->numberBetween($min = 1, $max = 10),
         ];
     }
 }

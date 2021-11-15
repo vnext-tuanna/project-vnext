@@ -17,7 +17,6 @@ class CreateReportsTable extends Migration
             $table->bigInteger('id')->autoIncrement();
             $table->longText('content');
             $table->bigInteger('user_id');
-            $table->bigInteger('to_user_id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');

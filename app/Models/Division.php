@@ -14,4 +14,8 @@ class Division extends Model
     {
         return $this->hasMany(User::class, 'user_id', 'id');
     }
+    public function managers()
+    {
+        return $this->hasMany(Manager::class, 'position_id', 'id');
+    }
 }

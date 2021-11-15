@@ -16,6 +16,10 @@ class Skill extends Model
     {
         return $this->belongsToMany(User::class, 'user_skills', 'user_id', 'skill_id')->withTrashed();
     }
+    public function managers()
+    {
+        return $this->belongsToMany(Manager::class, 'user_skills')->withTrashed();
+    }
     public function userskill()
     {
         return $this->hasMany(UserSkill::class);
