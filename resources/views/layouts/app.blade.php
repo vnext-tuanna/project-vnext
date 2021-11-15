@@ -12,7 +12,13 @@
     <div class="header_toggle"> <i class="bi bi-text-indent-left" id="header-toggle"></i> </div>
     <div class="p-3">
         @auth
-            <img src="{{Auth::user()->image}}" width="40px" height="40px" style="border-radius: 30px" alt="Chua co anh">
+            @if(Str::contains(Auth::user()->image, 'images/user'))
+                <img src="{{asset('storage/'. Auth::user()->image)}}" width="40px" height="40px" style="border-radius: 30px" alt="Chua co anh">
+
+            @else
+                <img src="{{Auth::user()->image}}" width="40px" height="40px" style="border-radius: 30px"
+                     alt="">
+            @endif
         @endauth
     </div>
 </header>
@@ -25,7 +31,7 @@
                 <a href="#" class="nav_link"> <i class='bi bi-megaphone nav_icon'></i> <span class="nav_name">Request</span> </a>
                 <a href="#" class="nav_link"> <i class="bi bi-people nav_icon"></i><span class="nav_name">Member</span> </a>
                 <a href="{{route('report.index')}}" class="nav_link"> <i class="bi bi-check2-square nav_icon"></i><span class="nav_name">Report</span> </a>
-                <a href="#" class="nav_link"> <i class='bi bi-person nav_icon'></i> <span class="nav_name">Acount</span> </a>
+                <a href="{{route('user.index')}}" class="nav_link"> <i class='bi bi-person nav_icon'></i> <span class="nav_name">Acount</span> </a>
                 <a href="{{route('logout')}}" class="nav_link"> <i class='bi bi-box-arrow-right nav_icon'></i> <span class="nav_name">SignOut</span> </a>
             </div>
         </div>

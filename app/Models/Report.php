@@ -10,13 +10,10 @@ class Report extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'reports';
-// <<<<<<< feat/report
 
-// //     public $fillable = [ 'description', 'user_id', 'title'];
-// // =======
-// //     public function user()
-// //     {
-// //         return $this->belongsTo(User::class)->withTrashed();
-// //     }
-// >>>>>>> develop
+      public $fillable = [ 'description', 'user_id', 'title'];
+//      public function user()
+//      {
+//          return $this->belongsTo(User::class)->withTrashed();
+//      }
 }

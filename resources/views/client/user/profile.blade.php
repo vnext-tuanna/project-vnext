@@ -2,13 +2,12 @@
 @push('style')
     <link rel="stylesheet" href="{{asset('css/datatable.min.css')}}">
 @endpush
-
 @section('content')
     <div class="section__user">
         <div class="section__user__content">
 
             <div class="content-body row">
-                <div class="content__profile col-md-3 col-lg-3">
+                <div class="content__profile col-md-6 col-lg-3">
                     <div class="content__head pt-3">
                         <h4><i class="bi bi-person-bounding-box"></i> Profile</h4>
                         <hr>
@@ -16,35 +15,40 @@
                     <div class="user-info  p-3 ">
                         <div class="d-flex content__title">
                             <div class="flex-shrink-0 image-head">
-                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">
+                                @if(Str::contains($user->image, 'images/user'))
+                                    <img src="{{asset('storage/'. $user->image)}}" width="60px" height="60px"
+                                         alt="">
+                                @else
+                                    <img src="{{$user->image}}" width="60px" height="60px"
+                                         alt="">
+                                @endif
                             </div>
                             <div class="flex-grow-0 ms-3 name">
-                                <span class=" fs-4 fw-bold">Luca Doncic</span>
+                                <span class=" fs-4 fw-bold">{{$user->name}}</span>
                                 <br>
                                 <span>PHP Developer</span>
                             </div>
                         </div>
                         <div class="content__info mt-3">
                             <ul class="list-unstyled">
-                                <li><i class="bi bi-telephone"></i> +84962721374</li>
-                                <li><i class="bi bi-envelope"></i> tuanna3@vnext.com.vn</li>
-                                <li><i class="bi bi-pin-map"></i> Ha noi - Viet Nam</li>
-                                <li><i class="bi bi-code-slash"></i> PHP, Laravel, Javascript</li>
-
+                                <li><i class="bi bi-envelope"></i> {{$user->email}}</li>
+                               <li><i class="bi bi-code-slash"></i> Skill
+                                </li>
                             </ul>
                         </div>
                         <div class="content__menu">
                             <ul class="list-unstyled ml-3 menu__link">
-                                <li><a href=""><i class="bi bi-eye"></i> &nbsp;Overview</a></li>
-                                <li><a href=""><i class="bi bi-layers"></i> &nbsp;Account Information</a></li>
-                                <li><a href=""><i class="bi bi-pencil-square"></i> &nbsp;Change Information</a></li>
-                                <li><a href=""><i class="bi bi-file-lock"></i> &nbsp;Change Password</a></li>
+                                <li><a href="{{route('user.show', $user->id)}}"><i class="bi bi-layers"></i> &nbsp;Account Information</a></li>
+                                <li><a href="{{route('user.edit', $user->id)}}"><i class="bi bi-pencil-square"></i> &nbsp;Change Information</a></li>
+                                @if(Auth::user()->provider==null)
+                                    <li><a href="{{route('changePassword.edit',$user->id)}}"><i class="bi bi-file-lock"></i> &nbsp;Change Password</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
 
                 </div>
-                <div class="content__profile col-md-9 col-xl-9">
+                <div class="content__profile col-md-6 col-lg-9">
                   <div class="content__following">
                       <div class="follow-title pt-3">
                           <h4><i class="bi bi-check2-all"></i> Following</h4>

@@ -294,3 +294,12 @@ main {
 ::placeholder{
     color: red !important;
 }
+.user-info-account {
+    margin-top: 20px !important;
+    min-height: 250px;
+    height: 250px;
+    box-shadow: -1px 1px 3px 1px rgba(0,0,0,0.26);
+    -webkit-box-shadow: -1px 1px 3px 1px rgba(0,0,0,0.26);
+    -moz-box-shadow: -1px 1px 3px 1px rgba(0,0,0,0.26);
+    border-radius: 15px;
+}

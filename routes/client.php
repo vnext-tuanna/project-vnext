@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginFormController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Auth\AuthenticateController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 
 Route::get('/', function () {
     return view('client.login');
@@ -32,4 +34,7 @@ Route::middleware('auth')->group(function () {
         return view('client.index');
     })->name('index');
     Route::resource('report', ReportController::class);
+    Route::resource('user', UserController::class);
+    Route::get('change/{id}', [ChangePasswordController::class, 'change'])->name('changePassword.edit');
+    Route::post('change/{id}', [ChangePasswordController::class, 'changePassword']);
 });
