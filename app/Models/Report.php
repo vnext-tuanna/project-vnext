@@ -10,10 +10,19 @@ class Report extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'reports';
+// CLIENT
 
-      public $fillable = [ 'description', 'user_id', 'title'];
-//      public function user()
-//      {
-//          return $this->belongsTo(User::class)->withTrashed();
-//      }
+    public $fillable = [ 'description', 'user_id', 'title'];
+// // =======
+
+//admin
+    public function user()
+    {
+        return $this->belongsTo(User::class)->withTrashed();
+    }
+    public function manager()
+    {
+        return $this->belongsTo(Manager::class)->withTrashed();
+    }
+// >>>>>>> develop
 }

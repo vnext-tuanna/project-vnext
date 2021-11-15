@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Request;
-use App\Models\UserSkill;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -25,7 +23,7 @@ class UserService extends BaseService
     {
         return $this->userRepository->with('division', 'position', 'userskills')->get();
     }
-    public function store($data)
+    public function storeUser($data)
     {
         return $this->userRepository->create($data);
     }

@@ -18,4 +18,9 @@ class UserSkill extends Model
     {
         return $this->belongsTo(Skill::class, 'user_skills', 'user_id', 'skill_id');
     }
+    public function manager()
+    {
+        return $this->belongsToMany(Manager::class, 'user_skills', 'manager_id', 'skill_id');
+        // return $this->belongsToMany(User::class,'user_skills');
+    }
 }

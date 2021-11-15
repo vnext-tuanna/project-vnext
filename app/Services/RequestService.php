@@ -21,11 +21,11 @@ class RequestService extends BaseService
      */
     public function getAllRequests(): Collection
     {
-        return $this->requestRepository->with('user')->where('status', 1)->get();
+        return $this->requestRepository->with('user', 'manager')->where('status', 1)->get();
     }
     public function getWaitingRequests(): Collection
     {
-        return $this->requestRepository->where('status', 0)->get();
+        return $this->requestRepository->with('user', 'manager')->where('status', 0)->get();
     }
     public function appprove($id)
     {
