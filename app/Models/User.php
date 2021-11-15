@@ -29,6 +29,8 @@ class User extends Authenticatable
         'division_id',
         'follow_id',
         'role',
+        'google_id',
+        'facebook_id',
         'password',
         'provider',
         'provider_id',
@@ -78,6 +80,6 @@ class User extends Authenticatable
     public function userskills()
     {
         // return $this->belongsToMany(UserSkill::class,'user_skills','user_id','skill_id');
-        return $this->hasMany(UserSkill::class, 'user_id', 'id');
+        return $this->belongsToMany(UserSkill::class, 'user_id', 'id');
     }
 }

@@ -17,9 +17,11 @@ class CreateUserSkillsTable extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('skill_id');
+            $table->bigInteger('manager_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('skill_id')->references('id')->on('skills');
+            $table->foreign('manager_id')->references('id')->on('managers');
         });
     }
 

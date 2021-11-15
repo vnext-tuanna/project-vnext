@@ -18,14 +18,14 @@ class CreateRequestsTable extends Migration
             $table->string('type');
             $table->longText('content');
             $table->bigInteger('user_id');
-            $table->bigInteger('to_user_id');
+            $table->bigInteger('manager_id');
             $table->date('start_date');
             $table->date('end_date');
             $table->unsignedSmallInteger('status');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('to_user_id')->references('id')->on('users');
+            $table->foreign('manager_id')->references('id')->on('managers');
         });
     }
 

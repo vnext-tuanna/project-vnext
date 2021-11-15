@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DivisionController;
+use App\Http\Controllers\admin\ManagerController;
 use App\Http\Controllers\admin\PositionController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\RequestController;
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.home');
     });
     Route::resource('users', UserController::class);
+    Route::resource('managers', ManagerController::class);
     Route::resource('reports', ReportController::class);
     Route::get('waiting', [RequestController::class, 'getWaitingRequest']);
     Route::get('approve/{id}', [RequestController::class, 'approveWRequest']);

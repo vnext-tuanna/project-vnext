@@ -15,6 +15,12 @@
             </a>
         </li>
         <li>
+            <a href="/admin/managers" class="<?=$path_url == 'admin/managers' ? 'active' : ''?>">
+                <i class="fas fa-user-tie"></i>
+                <span class="links_name">Managers</span>
+            </a>
+        </li>
+        <li>
             <a href="/admin/users" class="<?=$path_url == 'admin/users' ? 'active' : ''?>">
                 <i class="fas fa-user-tie"></i>
                 <span class="links_name">User</span>

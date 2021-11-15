@@ -16,4 +16,8 @@ class Request extends Model
     {
         return $this->belongsTo(User::class)->withTrashed();
     }
+    public function manager()
+    {
+        return $this->belongsTo(Manager::class);
+    }
 }
