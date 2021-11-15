@@ -11,7 +11,13 @@
                         <div class="user-info  p-3 ">
                         <div class="d-flex content__title">
                             <div class="flex-shrink-0 image">
-{{--                                <img src="{{asset('client/images/person1.jpeg')}}" alt="...">--}}
+                                @if(Str::contains($user->image, asset('storage')))
+                                    <img src="{{asset('storage/'. $user->image)}}" width="60px" height="60px"
+                                         alt="">
+                                @else
+                                    <img src="{{$user->image}}" width="60px" height="60px"
+                                         alt="">
+                                @endif
                             </div>
                             <div class="flex-grow-0 ms-3 name">
                                 <span class=" fs-4 fw-bold">Luca Doncic</span>
