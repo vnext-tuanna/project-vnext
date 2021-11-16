@@ -27,6 +27,7 @@ class UserController extends Controller
         $this->skillService = $skillService;
         $this->userskillService = $userskillService;
         $this->managerService = $managerService;
+        $this->middleware('check.admin')->only('create', 'destroy');
     }
 
     public function index(Request $request)

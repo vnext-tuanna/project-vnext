@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Support\Facades\Hash;
 use App\Services\DivisionService;
 use App\Services\PositionService;
 use App\Services\SkillService;
@@ -24,6 +23,7 @@ class ManagerController extends Controller
         $this->positionService = $positionService;
         $this->skillService = $skillService;
         $this->userskillService = $userskillService;
+        $this->middleware('check.admin')->only('create', 'edit', 'destroy');
     }
 
     public function index(Request $request)
@@ -45,7 +45,7 @@ class ManagerController extends Controller
     public function update(Request $request, $id)
     {
         $managerService = $this->managerService->getManagerServiceById($id);
-        
+
         $managerService->update([
             'name' => $request->name,
             'division_id' => $request->division,

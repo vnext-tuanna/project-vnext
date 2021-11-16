@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DivisionController;
+use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\ManagerController;
 use App\Http\Controllers\admin\PositionController;
 use App\Http\Controllers\admin\ReportController;
@@ -25,8 +26,8 @@ use Illuminate\Support\Facades\Route;
 ###################
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('dashboard', function () {
+Route::group(['prefix' => 'admin','middleware' => 'check.login'], function () {
+    Route::get('/dashboards', function () {
         return view('admin.home');
     });
     Route::resource('users', UserController::class);
@@ -41,7 +42,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('skills', SkillController::class);
 });
 
-
+##### LOGIN-LOGOUT #############
+Route::get('login', [LoginController::class, 'formLogin'])->name('admin.login');
+Route::post('login', [LoginController::class, 'loginAdmin']);
+Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 
 

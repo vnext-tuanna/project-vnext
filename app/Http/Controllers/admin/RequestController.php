@@ -16,6 +16,7 @@ class RequestController extends Controller
     public function __construct(RequestService $requestService)
     {
         $this->requestService = $requestService;
+        $this->middleware('check.manager')->only('getWaitingRequest');
     }
     public function index()
     {

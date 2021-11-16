@@ -1,4 +1,4 @@
-@extends('layouts.dashboard',['name'=>'Waiting Report'])
+@extends('layouts.dashboard',['name'=>'Waiting Request'])
 
 @section('content')
     <div class="container">
@@ -28,7 +28,7 @@
                 <td>{{ $wRequests->id }}</td>
                 <td>{{ $wRequests->type }}</td>
                 <td>
-                  <p>
+                  <p class="text_content">
                     {{ $wRequests->content }}
                   </p>
                   <a href="{{ $wRequests->id }}" id="details" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $wRequests->id }}">

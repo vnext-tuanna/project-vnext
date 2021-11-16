@@ -16,6 +16,7 @@ class PositionController extends Controller
     public function __construct(PositionService $positionService)
     {
         $this->positionService = $positionService;
+        $this->middleware('check.admin')->only('create', 'edit', 'destroy');
     }
     public function index()
     {

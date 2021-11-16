@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\admin\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class LoginFormController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             return redirect(route('index'));
         } else {
-            return redirect()->back()->with('msg', 'Incorrect information');
+            return redirect()->back()->with('msg', 'Incorre1111ct information');
         }
     }
 }
