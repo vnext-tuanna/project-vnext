@@ -6,6 +6,7 @@ use App\Services\DivisionService;
 use App\Services\PositionService;
 use App\Services\SkillService;
 use App\Services\ManagerService;
+use App\Services\UserService;
 use App\Services\UserSkillService;
 use Illuminate\Http\Request;
 
@@ -16,13 +17,15 @@ class ManagerController extends Controller
     private $positionService;
     private $skillService;
     private $userskillService;
-    public function __construct(DivisionService $divisionService, ManagerService $managerService, PositionService $positionService, SkillService $skillService, UserSkillService $userskillService)
+    private $userService;
+    public function __construct(DivisionService $divisionService, ManagerService $managerService, PositionService $positionService, SkillService $skillService, UserSkillService $userskillService, UserService $userService)
     {
         $this->divisionService = $divisionService;
         $this->managerService = $managerService;
         $this->positionService = $positionService;
         $this->skillService = $skillService;
         $this->userskillService = $userskillService;
+        $this->userService = $userService;
         $this->middleware('check.admin')->only('create', 'edit', 'destroy');
     }
 
@@ -45,17 +48,21 @@ class ManagerController extends Controller
     public function update(Request $request, $id)
     {
         $managerService = $this->managerService->getManagerServiceById($id);
-
-        $managerService->update([
-            'name' => $request->name,
-            'division_id' => $request->division,
-            'position_id' => $request->position,
-            'role' => $request->role,
-        ]);
-        // dd($managerService->skills);
-        $managerService->skills()->sync($request->skill);
-        // dd($managerService);
-        return redirect('/admin/managers');
+        $data = $request->all();
+        $data['email'] = $managerService->email;
+        $data['position_id'] = $managerService->position_id;
+        $data['division_id'] = $managerService->division_id;
+        $data['password'] = $managerService->password;
+        if ($request->role == 3) {
+            $userService = $this->userService->storeUser($data);
+            $userService->skills()->attach($request->skill);
+            $this->managerService->delete($id);
+            return redirect('admin/managers');
+        } else {
+            $managerService->update($data);
+            $managerService->skills()->sync($request->skill);
+             return redirect('/admin/managers');
+        }
     }
     public function destroy($id)
     {

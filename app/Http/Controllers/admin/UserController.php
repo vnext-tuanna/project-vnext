@@ -76,14 +76,21 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $userService = $this->userService->getUserServiceById($id);
-        $userService->update([
-            'name' => $request->name,
-            'division_id' => $request->division,
-            'position_id' => $request->position,
-            'role' => $request->role,
-        ]);
-        $userService->skills()->sync($request->skill);
-        return redirect('/admin/users');
+        $data = $request->all();
+        $data['email'] = $userService->email;
+        $data['position_id'] = $userService->position_id;
+        $data['division_id'] = $userService->division_id;
+        $data['password'] = $userService->password;
+        if ($request->role == 3) {
+            $userService->update($data);
+            $userService->skills()->sync($request->skill);
+            return redirect('/admin/users');
+        } else {
+            $managerService = $this->managerService->storeManager($data);
+            $managerService->skills()->attach($request->skill);
+            $this->userService->delete($id);
+            return redirect('admin/users');
+        }
     }
     public function destroy($id)
     {
