@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Manager extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $guarded = 'manager';
     protected $table = 'managers';
     protected $fillable = [
