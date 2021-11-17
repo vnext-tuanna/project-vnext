@@ -26,15 +26,28 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3 disable">
-                <label for="exampleInputEmail1" class="form-label">Role</label>
-                <select class="form-select form-select-sm" name='role' aria-label=".form-select-sm example">
-                    @foreach (App\Models\User::ROLE as $key => $role)
-                        <option value="{{ $key }}" <?= $users->role == $key ? 'selected' : '' ?>>
-                            {{ $role }}</option>
-                    @endforeach
-                </select>
-            </div>
+            @if (Auth::guard('manager')->user()->role == 2)
+                <div class="mb-3 disable">
+                    <label for="exampleInputEmail1" class="form-label">Role</label>
+                    <select class="form-select form-select-sm" name='role' aria-label=".form-select-sm example">
+                        @foreach (App\Models\User::ROLE as $key => $role)
+                            <option value="{{ $key }}" <?= $users->role == $key ? 'selected' : '' ?>>
+                                {{ $role }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @else
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Role</label>
+                    <select class="form-select form-select-sm" name='role' aria-label=".form-select-sm example">
+                        @foreach (App\Models\User::ROLE as $key => $role)
+                            <option value="{{ $key }}" <?= $users->role == $key ? 'selected' : '' ?>>
+                                {{ $role }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Skill</label><br>
                 <select class="js-example-basic-multiple" name="skill[]" multiple="multiple">

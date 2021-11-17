@@ -47,8 +47,6 @@ Route::get('login', [LoginController::class, 'formLogin'])->name('admin.login');
 Route::post('login', [LoginController::class, 'loginAdmin']);
 Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-
-
 ###################
 # client
 ###################

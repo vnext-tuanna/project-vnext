@@ -8,14 +8,24 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
                 <input type="text" class="form-control" name="name">
+                @error('name')
+                    <p>{{ $message }}</p>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>
                 <input type="email" class="form-control" name="email">
+                @error('email')
+                    <p>{{ $message }}</p>
+                @enderror
             </div>
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Password</label>
                 <input type="password" class="form-control" name="password">
+                @error('password')
+                    <p>{{ $message }}</p>
+                @enderror
             </div>
             @if (Auth::guard('manager')->user()->role == 1)
                 <div class="mb-3">
@@ -59,6 +69,9 @@
                         <option value="{{ $skill->id }}"> {{ $skill->name }}</option>
                     @endforeach
                 </select>
+                @error('skill')
+                    <p>{{ $message }}</p>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="/admin/users" type="submit" class="btn btn-danger">Cancel</a>

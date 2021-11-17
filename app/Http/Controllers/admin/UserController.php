@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Services\DivisionService;
 use App\Services\ManagerService;
 use Illuminate\Support\Facades\Hash;
@@ -42,32 +43,22 @@ class UserController extends Controller
         $skills = $this->skillService->getAllSkills();
         return view('admin.user.create', compact('divisions', 'positions', 'skills'));
     }
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        if ($request->role == 3) {
-            $password = Hash::make($request->password);
-            $userService = $this->userService->storeUser([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $password,
-                'role' => $request->role,
-                'division_id' => $request->division,
-                'position_id' => $request->position,
-
-            ]);
+        $userInfo  = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'division_id' => $request->division,
+            'position_id' => $request->position,
+        ];
+        if ($userInfo['role'] == 3) {
+            $userService = $this->userService->storeUser($userInfo);
             $userService->skills()->attach($request->skill);
             return redirect('admin/users');
         } else {
-            $password = Hash::make($request->password);
-            $managerService = $this->managerService->storeManager([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $password,
-                'role' => $request->role,
-                'division_id' => $request->division,
-                'position_id' => $request->position,
-
-            ]);
+            $managerService = $this->managerService->storeManager($userInfo);
             $managerService->skills()->attach($request->skill);
             return redirect('admin/managers');
         }
