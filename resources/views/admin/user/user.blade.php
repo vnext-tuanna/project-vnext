@@ -3,6 +3,9 @@
     <div class="container">
         <div class="btn-option">
             <a href="users/create" class="btn btn-sm btn-primary">Create User</a>
+            @if (session('msg'))
+                <p class="text-danger">{{ session('msg') }}</p>
+            @endif
         </div>
         <table
             id="example"
@@ -17,7 +20,7 @@
                 <th>Division</th>
                 <th>Position</th>
                 <th>Role</th>
-                <td>Option</td>
+                <th>Option</th>
             </tr>
         </thead>
         <tbody>

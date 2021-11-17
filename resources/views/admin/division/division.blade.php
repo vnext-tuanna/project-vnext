@@ -4,6 +4,9 @@
     <div class="container">
         <div class="btn-option">
             <a href="divisions/create" class="btn btn-sm btn-primary">Create Division</a>
+            @if (session('msg'))
+                <p class="text-danger">{{ session('msg') }}</p>
+            @endif
         </div>
         <table
             id="example"

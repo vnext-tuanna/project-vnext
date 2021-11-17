@@ -17,6 +17,7 @@ class SkillController extends Controller
     public function __construct(SkillService $skillService)
     {
         $this->skillService = $skillService;
+        $this->middleware('check.admin')->only('create', 'edit', 'destroy');
     }
     public function index()
     {

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Mail\SendMail;
+use App\Mail\TestMail;
 use App\Services\RequestService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RequestController extends Controller
 {
@@ -16,6 +19,7 @@ class RequestController extends Controller
     public function __construct(RequestService $requestService)
     {
         $this->requestService = $requestService;
+        $this->middleware('check.manager')->only('getWaitingRequest');
     }
     public function index()
     {
@@ -29,7 +33,10 @@ class RequestController extends Controller
     }
     public function approveWRequest($id)
     {
+        $request = $this->requestService->getRequestById($id);
+        $email = $request->user->email;
         $this->requestService->appprove($id);
+        Mail::to($email)->send(new SendMail($request));
         return redirect('admin/waiting');
     }
     public function denyWRequest($id)

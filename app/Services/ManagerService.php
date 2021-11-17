@@ -21,7 +21,7 @@ class ManagerService extends BaseService
      */
     public function getAllManager(): Collection
     {
-        return $this->managerRepository->with('division', 'position', 'managerskill')->get();
+        return $this->managerRepository->with('division', 'position', 'managerskill')->all();
     }
     public function edit($id)
     {
