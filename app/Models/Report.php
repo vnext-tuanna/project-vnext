@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Report extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $table = 'reports';
-// CLIENT
+    // CLIENT
 
-    public $fillable = [ 'description', 'user_id', 'title'];
-// // =======
+    public $fillable = ['description', 'user_id', 'title'];
+    // // =======
 
-//admin
+    //admin
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();
@@ -24,5 +24,5 @@ class Report extends Model
     {
         return $this->belongsTo(Manager::class)->withTrashed();
     }
-// >>>>>>> develop
+    // >>>>>>> develop
 }

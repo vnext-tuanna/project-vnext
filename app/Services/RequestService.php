@@ -36,4 +36,8 @@ class RequestService extends BaseService
     {
         $this->requestRepository->delete($id);
     }
+    public function getRequestById($id)
+    {
+        return $this->requestRepository->with('user', 'manager')->find($id);
+    }
 }

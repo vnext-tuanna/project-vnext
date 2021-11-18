@@ -9,7 +9,7 @@
     <ul class="nav-links">
         
         <li>
-            <a href="/admin/dashboard" class="<?=$path_url == 'admin/dashboard' ? 'active' : ''?>">
+            <a href="/admin/dashboards" class="<?=$path_url == 'admin/dashboards' ? 'active' : ''?>">
                 <i class="bx bx-grid-alt"></i>
                 <span class="links_name">Dashboard</span>
             </a>
@@ -17,7 +17,7 @@
         <li>
             <a href="/admin/managers" class="<?=$path_url == 'admin/managers' ? 'active' : ''?>">
                 <i class="fas fa-user-tie"></i>
-                <span class="links_name">Managers</span>
+                <span class="links_name">Manager</span>
             </a>
         </li>
         <li>

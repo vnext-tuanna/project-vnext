@@ -15,8 +15,10 @@ class DivisionController extends Controller
     private $divisionService;
     public function __construct(DivisionService $divisionService)
     {
-        return $this->divisionService = $divisionService;
+        $this->divisionService = $divisionService;
+        $this->middleware('check.admin')->only('create', 'edit', 'destroy');
     }
+
     public function index()
     {
         $divisions = $this->divisionService->getAllDivisions();

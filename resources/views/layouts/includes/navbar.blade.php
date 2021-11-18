@@ -11,7 +11,7 @@
         <div class="avatar_dropdown">
             <a href="#">Profile</a>
             <a href="#">Settings</a>
-            <a href="#">Logout</a>
+            <a href="logout">Logout</a>
         </div>
     </div>
 </nav>

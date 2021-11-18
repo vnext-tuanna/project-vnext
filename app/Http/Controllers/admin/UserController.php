@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Services\DivisionService;
 use App\Services\ManagerService;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,7 @@ class UserController extends Controller
         $this->skillService = $skillService;
         $this->userskillService = $userskillService;
         $this->managerService = $managerService;
+        $this->middleware('check.admin')->only('create', 'destroy');
     }
 
     public function index(Request $request)
@@ -41,32 +43,22 @@ class UserController extends Controller
         $skills = $this->skillService->getAllSkills();
         return view('admin.user.create', compact('divisions', 'positions', 'skills'));
     }
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        if ($request->role == 3) {
-            $password = Hash::make($request->password);
-            $userService = $this->userService->storeUser([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $password,
-                'role' => $request->role,
-                'division_id' => $request->division,
-                'position_id' => $request->position,
-
-            ]);
+        $userInfo  = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+            'division_id' => $request->division,
+            'position_id' => $request->position,
+        ];
+        if ($userInfo['role'] == 3) {
+            $userService = $this->userService->storeUser($userInfo);
             $userService->skills()->attach($request->skill);
             return redirect('admin/users');
         } else {
-            $password = Hash::make($request->password);
-            $managerService = $this->managerService->storeManager([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $password,
-                'role' => $request->role,
-                'division_id' => $request->division,
-                'position_id' => $request->position,
-
-            ]);
+            $managerService = $this->managerService->storeManager($userInfo);
             $managerService->skills()->attach($request->skill);
             return redirect('admin/managers');
         }
@@ -84,14 +76,21 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $userService = $this->userService->getUserServiceById($id);
-        $userService->update([
-            'name' => $request->name,
-            'division_id' => $request->division,
-            'position_id' => $request->position,
-            'role' => $request->role,
-        ]);
-        $userService->skills()->sync($request->skill);
-        return redirect('/admin/users');
+        $data = $request->all();
+        $data['email'] = $userService->email;
+        $data['position_id'] = $userService->position_id;
+        $data['division_id'] = $userService->division_id;
+        $data['password'] = $userService->password;
+        if ($request->role == 3) {
+            $userService->update($data);
+            $userService->skills()->sync($request->skill);
+            return redirect('/admin/users');
+        } else {
+            $managerService = $this->managerService->storeManager($data);
+            $managerService->skills()->attach($request->skill);
+            $this->userService->delete($id);
+            return redirect('admin/users');
+        }
     }
     public function destroy($id)
     {
