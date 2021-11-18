@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelFollow\Followable;
 
 class User extends Authenticatable
 {
+
     const ROLE = ['1' => 'Admin', '2' => 'Manager', '3' => 'Staff'];
 
-    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable,SoftDeletes, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -57,7 +59,7 @@ class User extends Authenticatable
     ];
     public function requests()
     {
-        return $this->hasMany(Request::class, 'user_id', 'id');
+        return $this->hasMany(Requests::class, 'user_id', 'id');
     }
     public function reports()
     {
@@ -74,10 +76,5 @@ class User extends Authenticatable
     public function skills()
     {
         return $this->belongsToMany(Skill::class, 'user_skills', 'user_id', 'skill_id')->withTrashed();
-    }
-    public function userskills()
-    {
-        // return $this->belongsToMany(UserSkill::class,'user_skills','user_id','skill_id');
-        return $this->belongsToMany(UserSkill::class, 'user_id', 'id');
     }
 }

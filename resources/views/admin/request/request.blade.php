@@ -1,4 +1,4 @@
-@extends('layouts.dashboard',['name'=>'Request'])
+@extends('layouts.dashboard',['name'=>'Requests'])
 
 @section('content')
     <div class="container">
@@ -55,6 +55,7 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </td>
                         <td>{{ $requests->user->name }}</td>
                         <td>{{ $requests->manager->name }}</td>
@@ -62,6 +63,17 @@
                         <td>{{ $requests->end_date }}</td>
                     </tr>
                 @endforeach
+=======
+                          </div>
+                        </div>
+                  </td>
+                <td>{{ $requests->user->name }}</td>
+                <td>{{ $requests->manager->name }}</td>
+                <td>{{ $requests->start_date }}</td>
+                <td>{{ $requests->end_date }}</td>
+            </tr>
+              @endforeach
+>>>>>>> feat: Manage follow
 
             </tbody>
         </table>

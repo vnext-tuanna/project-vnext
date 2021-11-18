@@ -10,9 +10,9 @@
             <hr>
             <div class="content-body row">
                 <div class="col-md-6 col-xl-3 ">
-                    <div class="user-info-account  p-3 ">
-                        <div class="content__title">
-                            <div class="name d-flex">
+                    <div class="user-info-account p-3 d-flex align-items-center justify-content-center">
+                        <div class="content__title ">
+                            <div class="name d-flex ">
                                 <div class="image__info">
 
                                     @if(Str::contains($user->image, 'images/user'))
@@ -29,21 +29,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="content__info mt-3">
-                            <ul class="list-unstyled p-3">
-                                <li><i class="bi bi-telephone p-3"></i> +84962721374</li>
-                                <li><i class="bi bi-envelope p-3"></i> tuanna3@vnext.com.vn</li>
-                                <li><i class="bi bi-code-slash p-3"></i> PHP, Laravel, Javascript</li>
-                            </ul>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-md-6  col-xl-3">
                     <div class="user-info-account  p-3 ">
                         <div class="content__title text-center" style="margin: auto">
 
-                            <h2 style="margin-top: 30px; opacity: .5">PHP Developer</h2>
-                            <p style="font-size: 5rem" class="text-muted fw-bold">BO</p>
+                            <h2 style="margin-top: 30px; opacity: .5">{{$user->position->name}}</h2>
+                            <p style="font-size: 5rem" class="text-muted fw-bold">{{$user->division->name}}</p>
 
                         </div>
                     </div>
@@ -51,8 +45,16 @@
                 <div class="col-md-6 col-xl-3 ">
                     <div class="user-info-account  p-3 ">
                         <div class="content__title text-center" style="margin: auto">
-                            <h2 style="margin-top: 30px;  opacity: .5">Follow</h2>
-                            <p style="font-size: 5rem" class="text-muted fw-bold">100</p>
+                            <h2 style="margin-top: 30px;  opacity: .5">Following</h2>
+                            <p style="font-size: 4rem" class="text-muted fw-bold">{{$user->followings->count()}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 ">
+                    <div class="user-info-account  p-3 ">
+                        <div class="content__title text-center" style="margin: auto">
+                            <h2 style="margin-top: 30px;  opacity: .5">Follower</h2>
+                            <p style="font-size: 4rem" class="text-muted fw-bold">{{$user->followings->count()}}</p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +62,9 @@
                     <div class="user-info-account  p-3 ">
                         <div class="content__title text-center" style="margin: auto">
                             <h2 style="margin-top: 30px;  opacity: .5">Skill</h2>
-                            <p style="font-size: 5rem" class="text-muted fw-bold">PHP</p>
+                            @foreach($user->skills as $skill)
+                                <p style="" class="text-muted fw-bold">{{$skill->name}}</p>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -68,7 +72,7 @@
                     <div class="user-info-account  p-3 ">
                         <div class="content__title text-center" style="margin: auto">
                             <h2 style="margin-top: 30px;  opacity: .5">Request</h2>
-                            <p style="font-size: 5rem" class="text-muted fw-bold">0</p>
+                            <p style="font-size: 5rem" class="text-muted fw-bold">{{$user->requests->count()}}</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +80,7 @@
                     <div class="user-info-account  p-3 ">
                         <div class="content__title text-center" style="margin: auto">
                             <h2 style="margin-top: 30px;  opacity: .5">Report</h2>
-                            <p style="font-size: 5rem" class="text-muted fw-bold">0</p>
+                            <p style="font-size: 5rem" class="text-muted fw-bold">{{$user->reports->count()}}</p>
                         </div>
                     </div>
                 </div>
