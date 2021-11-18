@@ -3,13 +3,23 @@
 @section('content')
     <div class="section__request">
         <div class="request__header row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <h3>Your request</h3>
             </div>
-            <div class="col-md-6 row justify-content-between ">
-                <a href="{{route('request.add')}}" class="btn col-4 text-white" style="background-color: #10ac84">Create request</a>
-                <button href="" class="btn  col-3 text-white" id="requestMoth" style="background-color: #40739e">Request by month</button>
-                <button href="" class="btn col-4 text-white" id="requestWeek"  style="background-color: #40739e" >Request by day</button>
+            <div class="col-md-9 row justify-content-between ">
+                <a href="{{route('request')}}" class="btn col-2 text-white align-self-center" style="background-color: #1e3799">All request</a>
+                <a href="{{route('request.add')}}" class="btn col-2 text-white" style="background-color: #10ac84">Create request</a>
+                <div class="dropdown col-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Request by month
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @for($i = 1; $i <= 12; $i++)
+                            <a class="dropdown-item" href="{{route('request.month', $i)}}">Month {{$i}}</a>
+                        @endfor
+                    </div>
+                </div>
+                <a href="{{route('request.week')}}" class="btn col-2 text-white" id="requestWeek"  style="background-color: #40739e" >Request by week</a>
             </div>
         </div>
         <hr>
@@ -24,46 +34,37 @@
                         <th scope="col">Content</th>
                         <th scope="col">Approver</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Leave out</td>
-                        <td>Lorem11</td>
-                        <td>quyennv@vnext.com.vn</td>
-                        <td><span class="text-white px-2 rounded-3 bg-dark">pending</span></td>
-                        <td>08/11/2021</td>
-                        <td>
-                            <a href="" class="btn"><i class="bi bi-eye text-primary"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Leave early</td>
-                        <td>Lorem11</td>
-                        <td>quyennv@vnext.com.vn</td>
-                        <td><span class="text-white px-2 rounded-3 bg-danger">reject</span></td>
-                        <td>08/11/2021</td>
-                        <td>
-                            <a href="" class="btn"><i class="bi bi-eye text-primary"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>In leave</td>
-                        <td>Lorem11</td>
-                        <td>quyennv@vnext.com.vn</td>
-                        <td><span class="text-white px-2 rounded-3 bg-success">approved</span></td>
-                        <td>08/11/2021</td>
-                        <td>
-                            <a href="" class="btn"><i class="bi bi-eye text-primary"></i></a>
-                        </td>
-                    </tr>
+
+                   @foreach($requests as $key => $request)
+                       <tr>
+                           <th scope="row">{{$key++}}</th>
+                           <td>{{$request->type == 1? 'In Leave' : ($request->type == 2? 'Leave Out' : 'Leave Early')}}</td>
+                           <td>{{$request->content}}</td>
+                           <td>{{$request->manager->name}}</td>
+                           <td>
+                               @if($request->status==0)
+                                   <span class="text-white px-2 rounded-3 bg-dark">Pending</span>
+                               @elseif($request->status==1)
+                                   <span class="text-white px-2 rounded-3 bg-success">Accept</span>
+                               @else
+                                   <span class="text-white px-2 rounded-3 bg-danger">Reject</span>
+                               @endif
+
+                           </td>
+                           <td>{{$request->start_date}}</td>
+                           <td>{{$request->end_date}}</td>
+                       </tr>
+                   @endforeach
                     </tbody>
                 </table>
+                <div class="paginate d-flex justify-content-end">
+                    {{$requests->links()}}
+                </div>
             </div>
         </div>
     </div>
@@ -73,3 +74,8 @@
     <!-- Modal -->
 
 @endsection
+@push('footerScript')
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" ></script>
+@endpush

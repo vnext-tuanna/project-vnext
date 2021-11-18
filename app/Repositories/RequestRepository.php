@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Models\Request;
+use App\Models\Requests;
 
 class RequestRepository extends BaseRepository
 {
     public function model(): string
     {
-        return Request::class;
+        return Requests::class;
     }
 }

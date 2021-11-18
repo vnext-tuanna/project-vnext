@@ -26,13 +26,20 @@
                             <div class="flex-grow-0 ms-3 name">
                                 <span class=" fs-4 fw-bold">{{$user->name}}</span>
                                 <br>
-                                <span>PHP Developer</span>
+                                <span>{{$user->position->name}}</span>
+                                <br>
+                                <span>{{$user->division->name}}</span>
+
                             </div>
                         </div>
                         <div class="content__info mt-3">
                             <ul class="list-unstyled">
                                 <li><i class="bi bi-envelope"></i> {{$user->email}}</li>
-                               <li><i class="bi bi-code-slash"></i> Skill
+                               <li><i class="bi bi-code-slash"></i>
+                                   @foreach($user->skills as $skill)
+                                       <span>{{$skill->name}}</span>
+                                   @endforeach
+
                                 </li>
                             </ul>
                         </div>
@@ -51,222 +58,74 @@
                 <div class="content__profile col-md-6 col-lg-9">
                   <div class="content__following">
                       <div class="follow-title pt-3">
-                          <h4><i class="bi bi-check2-all"></i> Following</h4>
+                          <h4><i class="bi bi-check2-all"></i> Following ({{$followings->count()}})</h4>
                           <hr>
                       </div>
-                      <div class="user-info mb-1">
-                          <div class="content__follow ">
-                              <div class="follow__list d-flex justify-content-between align-items-center">
-                                  <div class="image ">
-                                      <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                  </div>
-                                  <div class="division">
-                                      <p>Nguyen Anh Tuan</p>
-                                  </div>
-                                  <div class="position">
-                                      <p>PHP Internship</p>
-                                  </div>
-                                  <div class="skill">
-                                      <p>PHP, Laravel, Javasript</p>
-                                  </div>
-                                  <div class="action">
-                                      <a href="" class="btn">Unfollow</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="user-info mb-1">
-                          <div class="content__follow ">
-                              <div class="follow__list d-flex justify-content-between align-items-center">
-                                  <div class="image ">
-                                      <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                  </div>
-                                  <div class="division">
-                                      <p>Nguyen Anh Tuan</p>
-                                  </div>
-                                  <div class="position">
-                                      <p>PHP Internship</p>
-                                  </div>
-                                  <div class="skill">
-                                      <p>PHP, Laravel, Javasript</p>
-                                  </div>
-                                  <div class="action">
-                                      <a href="" class="btn">Unfollow</a>
+                     @foreach($followings as $following)
+                          <div class="user-info mb-1">
+                              <div class="content__follow ">
+                                  <div class="follow__list d-flex justify-content-between align-items-center">
+                                      <div class="image ">
+                                          <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
+                                      </div>
+                                      <div class="name">
+                                          <p>{{$following->name}}</p>
+                                      </div>
+                                      <div class="position">
+                                          <p>{{$following->position->name}}</p>
+                                      </div>
+                                      <div class="skill">
+                                          @foreach($following->skills as $skill)
+                                              <span>{{$skill->name}}</span>
+                                          @endforeach
+                                      </div>
+                                      <div class="division">
+                                          <p>{{$following->division->name}}</p>
+                                      </div>
+                                      <div class="action">
+                                          <a href="{{route('follow', $following->id)}}" class="btn" style="background-color: #130f40; color: white" >Unfollow</a>
+                                      </div>
                                   </div>
                               </div>
                           </div>
-                      </div> <div class="user-info mb-1">
-                          <div class="content__follow ">
-                              <div class="follow__list d-flex justify-content-between align-items-center">
-                                  <div class="image ">
-                                      <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                  </div>
-                                  <div class="division">
-                                      <p>Nguyen Anh Tuan</p>
-                                  </div>
-                                  <div class="position">
-                                      <p>PHP Internship</p>
-                                  </div>
-                                  <div class="skill">
-                                      <p>PHP, Laravel, Javasript</p>
-                                  </div>
-                                  <div class="action">
-                                      <a href="" class="btn">Unfollow</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="user-info mb-1">
-                          <div class="content__follow ">
-                              <div class="follow__list d-flex justify-content-between align-items-center">
-                                  <div class="image ">
-                                      <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                  </div>
-                                  <div class="division">
-                                      <p>Nguyen Anh Tuan</p>
-                                  </div>
-                                  <div class="position">
-                                      <p>PHP Internship</p>
-                                  </div>
-                                  <div class="skill">
-                                      <p>PHP, Laravel, Javasript</p>
-                                  </div>
-                                  <div class="action">
-                                      <a href="" class="btn">Unfollow</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="user-info mb-1">
-                          <div class="content__follow ">
-                              <div class="follow__list d-flex justify-content-between align-items-center">
-                                  <div class="image ">
-                                      <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                  </div>
-                                  <div class="division">
-                                      <p>Nguyen Anh Tuan</p>
-                                  </div>
-                                  <div class="position">
-                                      <p>PHP Internship</p>
-                                  </div>
-                                  <div class="skill">
-                                      <p>PHP, Laravel, Javasript</p>
-                                  </div>
-                                  <div class="action">
-                                      <a href="" class="btn">Unfollow</a>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                      @endforeach
                   </div>
                     <div class="content__followed">
                         <div class="follow-title pt-3">
-                            <h4><i class="bi bi-check2-all"></i> Followed</h4>
+                            <h4><i class="bi bi-check2-all"></i> Follower ({{$followers->count()}})</h4>
                             <hr>
                         </div>
-                        <div class="user-info mb-1">
-                            <div class="content__follow ">
-                                <div class="follow__list d-flex justify-content-between align-items-center">
-                                    <div class="image ">
-                                        <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                    </div>
-                                    <div class="division">
-                                        <p>Nguyen Anh Tuan</p>
-                                    </div>
-                                    <div class="position">
-                                        <p>PHP Internship</p>
-                                    </div>
-                                    <div class="skill">
-                                        <p>PHP, Laravel, Javasript</p>
-                                    </div>
 
+                        @foreach($followers as $follower)
+                            <div class="user-info mb-1">
+                                <div class="content__follow ">
+                                    <div class="follow__list d-flex justify-content-between align-items-center">
+                                        <div class="image ">
+                                            <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
+                                        </div>
+                                        <div class="division">
+                                            <p>{{$follower->name}}</p>
+                                        </div>
+                                        <div class="position">
+                                            <p>PHP Internship</p>
+                                        </div>
+                                        <div class="skill">
+                                            <p>PHP, Laravel, Javasript</p>
+                                        </div>
+                                        <div class="content__action text-center">
+                                            @if($user->isFollowing($follower->id))
+                                                <a href="{{route('follow', $follower->id)}}" class="btn btn-follow">Unfollow</a>
+                                            @else
+                                                <a href="{{route('follow', $follower->id)}}" class="btn btn-follow">Follow</a>
+                                            @endif
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="user-info mb-1">
-                            <div class="content__follow ">
-                                <div class="follow__list d-flex justify-content-between align-items-center">
-                                    <div class="image ">
-                                        <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                    </div>
-                                    <div class="division">
-                                        <p>Nguyen Anh Tuan</p>
-                                    </div>
-                                    <div class="position">
-                                        <p>PHP Internship</p>
-                                    </div>
-                                    <div class="skill">
-                                        <p>PHP, Laravel, Javasript</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="user-info mb-1">
-                            <div class="content__follow ">
-                                <div class="follow__list d-flex justify-content-between align-items-center">
-                                    <div class="image ">
-                                        <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                    </div>
-                                    <div class="division">
-                                        <p>Nguyen Anh Tuan</p>
-                                    </div>
-                                    <div class="position">
-                                        <p>PHP Internship</p>
-                                    </div>
-                                    <div class="skill">
-                                        <p>PHP, Laravel, Javasript</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="user-info mb-1">
-                            <div class="content__follow ">
-                                <div class="follow__list d-flex justify-content-between align-items-center">
-                                    <div class="image ">
-                                        <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                    </div>
-                                    <div class="division">
-                                        <p>Nguyen Anh Tuan</p>
-                                    </div>
-                                    <div class="position">
-                                        <p>PHP Internship</p>
-                                    </div>
-                                    <div class="skill">
-                                        <p>PHP, Laravel, Javasript</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="user-info mb-1">
-                            <div class="content__follow ">
-                                <div class="follow__list d-flex justify-content-between align-items-center">
-                                    <div class="image ">
-                                        <img src="{{asset('client/images/person1.jpeg')}}" alt="" class="rounded-3" >
-                                    </div>
-                                    <div class="division">
-                                        <p>Nguyen Anh Tuan</p>
-                                    </div>
-                                    <div class="position">
-                                        <p>PHP Internship</p>
-                                    </div>
-                                    <div class="skill">
-                                        <p>PHP, Laravel, Javasript</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
-
-
-
                 </div>
-
-
             </div>
         </div>
     </div>

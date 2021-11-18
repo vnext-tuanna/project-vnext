@@ -31,7 +31,7 @@ class Manager extends Authenticatable
     ];
     public function requests()
     {
-        return $this->hasMany(Request::class, 'manager_id', 'id');
+        return $this->hasMany(Requests::class, 'manager_id', 'id');
     }
     public function reports()
     {
