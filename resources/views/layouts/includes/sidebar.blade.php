@@ -1,5 +1,5 @@
 <?php
-    $path_url = Request::path();
+    $path_url = Requests::path();
 ?>
 <div class="sidebar">
     <div class="logo-details">

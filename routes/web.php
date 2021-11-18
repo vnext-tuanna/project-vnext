@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\RequestController;
 use App\Http\Controllers\admin\SkillController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,10 +27,8 @@ use Illuminate\Support\Facades\Route;
 ###################
 
 
-Route::group(['prefix' => 'admin','middleware' => 'check.login'], function () {
-    Route::get('/dashboards', function () {
-        return view('admin.home');
-    });
+Route::group(['prefix' => 'admin', 'middleware' => 'check.login'], function () {
+    Route::get('dashboards', [DashboardController::class, 'getSum']);
     Route::resource('users', UserController::class);
     Route::resource('managers', ManagerController::class);
     Route::resource('reports', ReportController::class);
