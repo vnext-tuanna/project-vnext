@@ -4,8 +4,8 @@
     <div class="container">
         <div class="btn-option ">
             <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
-            @if(session('msg'))
-                <p class="text-danger">{{session('msg')}}</p>
+            @if (session('msg'))
+                <p class="text-danger">{{ session('msg') }}</p>
             @endif
         </div>
         <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
@@ -55,7 +55,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD
                         </td>
                         <td>{{ $requests->user->name }}</td>
                         <td>{{ $requests->manager->name }}</td>
@@ -63,17 +62,6 @@
                         <td>{{ $requests->end_date }}</td>
                     </tr>
                 @endforeach
-=======
-                          </div>
-                        </div>
-                  </td>
-                <td>{{ $requests->user->name }}</td>
-                <td>{{ $requests->manager->name }}</td>
-                <td>{{ $requests->start_date }}</td>
-                <td>{{ $requests->end_date }}</td>
-            </tr>
-              @endforeach
->>>>>>> feat: Manage follow
 
             </tbody>
         </table>
