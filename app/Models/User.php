@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelFollow\Followable;
 
 class User extends Authenticatable
 {
+
     const ROLE = ['1' => 'Admin', '2' => 'Manager', '3' => 'Staff'];
 
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
@@ -57,7 +59,7 @@ class User extends Authenticatable
     ];
     public function requests()
     {
-        return $this->hasMany(Request::class, 'user_id', 'id');
+        return $this->hasMany(Requests::class, 'user_id', 'id');
     }
     public function reports()
     {
@@ -65,7 +67,7 @@ class User extends Authenticatable
     }
     public function division()
     {
-        return $this->belongsTo(Division::class);
+        return $this->belongsTo(Division::class, 'user_id');
     }
     public function position()
     {

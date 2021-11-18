@@ -1,10 +1,10 @@
-@extends('layouts.dashboard',['name'=>'Request'])
+@extends('layouts.dashboard',['name'=>'Requests'])
 
 @section('content')
     <div class="container">
       <div class="btn-option">
         <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
-      </div> 
+      </div>
         <table
             id="example"
             class="table table-striped table-bordered dt-responsive nowrap"
@@ -58,7 +58,7 @@
                 <td>{{ $requests->end_date }}</td>
             </tr>
               @endforeach
-               
+
             </tbody>
         </table>
     </div>

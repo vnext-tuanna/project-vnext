@@ -28,7 +28,7 @@
             <a href="#" class="nav_logo"> <i class='bi bi-card-checklist nav_logo-icon'></i> <span class="nav_logo-name">Daily Report</span> </a>
             <div class="nav_list">
                 <a href="#" class="nav_link"> <i class='bi bi-house nav_icon'></i> <span class="nav_name">Home</span> </a>
-                <a href="#" class="nav_link"> <i class='bi bi-megaphone nav_icon'></i> <span class="nav_name">Request</span> </a>
+                <a href="{{route('request')}}" class="nav_link"> <i class='bi bi-megaphone nav_icon'></i> <span class="nav_name">Request</span> </a>
                 <a href="#" class="nav_link"> <i class="bi bi-people nav_icon"></i><span class="nav_name">Member</span> </a>
                 <a href="{{route('report.index')}}" class="nav_link"> <i class="bi bi-check2-square nav_icon"></i><span class="nav_name">Report</span> </a>
                 <a href="{{route('user.index')}}" class="nav_link"> <i class='bi bi-person nav_icon'></i> <span class="nav_name">Acount</span> </a>
@@ -78,6 +78,7 @@
     </script>
 @endpush
 @stack('modal')
+@stack('footerScript')
 
 @include('layouts.includes.script')
 

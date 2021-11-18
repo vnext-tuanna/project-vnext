@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Request;
+use App\Models\Requests;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RequestFactory extends Factory
@@ -12,7 +12,7 @@ class RequestFactory extends Factory
      *
      * @var string
      */
-    protected $model = Request::class;
+    protected $model = Requests::class;
 
     /**
      * Define the model's default state.

@@ -95,4 +95,8 @@ class UserController extends Controller
     {
         //
     }
+    public function follow(Request $request)
+    {
+        $user = User::where('id', Auth::id())->get();
+    }
 }

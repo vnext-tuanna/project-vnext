@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReportFactory extends Factory
@@ -23,7 +24,7 @@ class ReportFactory extends Factory
     {
         return [
             'content' => $this->faker->paragraph(2),
-            'user_id' => $this->faker->numberBetween($min = 1, $max = 20),
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

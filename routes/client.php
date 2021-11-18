@@ -6,6 +6,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\RequestController;
 
 Route::get('/', function () {
     return view('client.login');
@@ -37,4 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('user', UserController::class);
     Route::get('change/{id}', [ChangePasswordController::class, 'change'])->name('changePassword.edit');
     Route::post('change/{id}', [ChangePasswordController::class, 'changePassword']);
+    Route::prefix('request')->group(function () {
+        Route::get('/', [RequestController::class, 'index'])->name('request');
+        Route::get('add', [RequestController::class, 'create'])->name('request.add');
+        Route::post('add', [RequestController::class, 'store']);
+        Route::get('/request-by-week', [RequestController::class, 'getRequestByWeek'])->name('request.week');
+        Route::get('/request-by-month/{month}', [RequestController::class, 'getRequestByMonth'])->name('request.month');
+    });
 });

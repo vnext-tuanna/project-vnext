@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="section__request">
-
-
         <div class="request__form p-5 shadow">
             <div class="request__header row">
                 <div class="col-md-6">
@@ -14,36 +12,36 @@
                 </div>
             </div>
             <hr>
-            <form class="">
+            <form class="" method="POST">
+                @csrf
                 <div class="row mt-3 mb-3">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">Start date <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="inputEmail4">
+                        <input type="date" class="form-control" name="start_date">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">End date <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="inputPassword4">
+                        <input type="date" class="form-control" name="end_date">
                     </div>
                 </div>
                 <div class="form-group mt-3 mb-3">
                     <label for="inputAddress2">Approver</label>
-                    <select id="inputState" class="form-control">
-                        <option>quyennv@vnext.com.vn</option>
-                        <option>tiennd@vnext.com.vn</option>
-                    </select>
+                    <select id="inputState" class="form-control" name="manager_id" >
+                            <option value="{{$managers->id}}">{{$managers->name}}</option>
+¥                    </select>
                 </div>
 
                 <div class="form-group mt-3 mb-3">
                     <label for="inputAddress2">Type request</label>
-                    <select id="inputState" class="form-control">
-                        <option>In leave</option>
-                        <option>Leave out</option>
-                        <option>Leave early</option>
+                    <select id="inputState" class="form-control" name="type">
+                        @foreach($typeRequests as $key => $typeRequest)
+                            <option value="{{$key}}"> {{$typeRequest}} </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group mt-3 mb-3">
                     <label for="inputAddress">Reason <span class="text-danger">*</span></label>
-                    <textarea type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">Reason</textarea>
+                    <textarea type="text" class="form-control" name="content_request"></textarea>
                 </div>
 
                 <button type="submit" class="btn mt-3 text-white m-auto" style="background-color: #01a3a4 ">Create request</button>

@@ -50,7 +50,7 @@ class User extends Model
     ];
     public function requests()
     {
-        return $this->hasMany(Request::class, 'user_id', 'id');
+        return $this->hasMany(Requests::class, 'user_id', 'id');
     }
     public function reports()
     {
