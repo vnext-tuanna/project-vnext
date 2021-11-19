@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Requests;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -18,10 +19,9 @@ class DatabaseSeeder extends Seeder
              [
                 DivisionSeeder::class,
                 PositionSeeder::class,
-                FollowSeeder::class,
                 ManagerSeeder::class,
                 ReportSeeder::class,
-                RequestSeeder::class,
+                RequestsSeeder::class,
                 SkillSeeder::class,
                 UserSeeder::class,
              ]
