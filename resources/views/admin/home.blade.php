@@ -14,7 +14,7 @@
     </div>
     <div class="box">
         <div class="right-side">
-            <div class="box-topic">Total Report</div>
+            <div class="box-topic">Total Request</div>
             <div class="number">{{ $requests }}</div>
         </div>
         <i
