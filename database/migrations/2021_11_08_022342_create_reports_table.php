@@ -15,7 +15,7 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
-            $table->longText('content');
+            $table->longText('description');
             $table->bigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();

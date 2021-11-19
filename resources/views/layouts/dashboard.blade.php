@@ -13,7 +13,7 @@
 @include('layouts.includes.head')
 <body>
 @include('layouts.includes.sidebar')
-<section class="home-section">
+<section class="main-section">
     <nav>
         <div class="sidebar-button">
             <i class="bx bx-menu sidebarBtn"></i>
@@ -21,25 +21,18 @@
         </div>
         <div class="avatar">
             <img
-                class="avatar_image"
+                class="avatar__image"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1i0Q3w9qbLMPEZqSHoFVD-9oYIXGqXJrYmoFI4vXDr90v7PS-QcTdhSkbenXUjHFaXyc&usqp=CAU"
                 alt=""
             />
-            <div class="avatar_dropdown">
+            <div class="avatar__dropdown">
                 <p style="padding-top: 10px;padding-left:15px;">Xin chào, <strong>{{ Auth::guard('manager')->user()->name }}</strong></p>
                 <a href="#">Settings</a>
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+                <a href="{{ route('admin.logout') }}">Logout</a>
             </div>
         </div>
     </nav>
-    <div class="home-content">
+    <div class="main-content">
         @yield('content')
     </div>
     

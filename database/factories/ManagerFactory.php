@@ -31,7 +31,6 @@ class ManagerFactory extends Factory
             'password' => bcrypt('123'),
             'position_id' => $this->faker->numberBetween($min = 1, $max = 10),
             'division_id' => $this->faker->numberBetween($min = 1, $max = 10),
-            'follow_id' => $this->faker->numberBetween($min = 1, $max = 10),
             'role' => $this->faker->numberBetween($min = 1, $max = 3),
         ];
     }

@@ -7,7 +7,7 @@ use App\Models\Requests;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RequestFactory extends Factory
+class RequestsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

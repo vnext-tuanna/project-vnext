@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.login'], function () {
 ##### LOGIN-LOGOUT #############
 Route::get('login', [LoginController::class, 'formLogin'])->name('admin.login');
 Route::post('login', [LoginController::class, 'loginAdmin']);
-Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
+Route::get('admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 ###################
 # client
