@@ -24,7 +24,7 @@
                 @foreach ($requests as $requests)
                     <tr>
                         <td>{{ $requests->id }}</td>
-                        <td>{{ $requests->type }}</td>
+                        <td>{{ $requests->type == 1 ? 'In Leave' : ($requests->type == 2 ? 'Leave Out' : 'Leave Early') }}</td>
                         <td>
                             <p class="text_content">
                                 {{ $requests->content }}

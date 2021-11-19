@@ -16,11 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
             $table->string('name', 30);
-            $table->binary('image')->nullable();
+            $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->bigInteger('position_id');
             $table->bigInteger('division_id');
-            $table->bigInteger('follow_id')->nullable();
             $table->bigInteger('role');
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
@@ -31,7 +30,6 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->foreign('position_id')->references('id')->on('positions');
             $table->foreign('division_id')->references('id')->on('divisions');
-            $table->foreign('follow_id')->references('id')->on('follows');
         });
     }
 

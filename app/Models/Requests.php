@@ -11,7 +11,7 @@ class Requests extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'requests';
-    protected $fillable = ['type', 'content', 'user_id', 'manager_id', 'start_date', 'end_date'];
+    protected $fillable = ['type', 'content', 'user_id', 'manager_id', 'start_date', 'end_date', 'status'];
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();

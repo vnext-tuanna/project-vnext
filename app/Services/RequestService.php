@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\RequestRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class RequestService extends BaseService
 {
@@ -25,7 +26,7 @@ class RequestService extends BaseService
     }
     public function getWaitingRequests(): Collection
     {
-        return $this->requestRepository->with('user', 'manager')->where('status', 0)->get();
+        return $this->requestRepository->with('user', 'manager')->where('status', 0)->where('manager_id', Auth::guard('manager')->id())->get();
     }
     public function appprove($id)
     {
@@ -34,7 +35,8 @@ class RequestService extends BaseService
     }
     public function deny($id)
     {
-        $this->requestRepository->delete($id);
+        $rs = $this->requestRepository->find($id);
+        return $rs->update(['status' => 2]);
     }
     public function getRequestById($id)
     {

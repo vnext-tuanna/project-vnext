@@ -19,8 +19,6 @@ class Manager extends Authenticatable
         'position_id',
         'division_id',
         'role',
-        'google_id',
-        'facebook_id',
         'password',
         'provider',
         'provider_id',
