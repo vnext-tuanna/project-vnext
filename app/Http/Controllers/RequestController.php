@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ChangeRequestNotification;
 use App\Mail\RequestNotification;
 use App\Models\Manager;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RequestController extends Controller
 {
@@ -43,7 +45,34 @@ class RequestController extends Controller
             'end_date' => $request->end_date,
         ];
         $modal->fill($data)->save();
-        Mail::to($managers->email)->send(new RequestNotification($data));
+        Mail::to($managers->email)->send(new RequestNotification($modal));
+        return redirect(route('request'));
+    }
+    public function edit($id)
+    {
+        $typeRequests = [
+            1 => 'In leave',
+            2 => 'Leave Out',
+            3 => 'Leave Early',
+        ];
+        $request = Requests::find($id);
+        return view('client.request.edit', compact('request', 'typeRequests'));
+    }
+    public function update(Request $request, $id)
+    {
+        $managers = Manager::where('division_id', Auth::user()->division_id)->first();
+        $modal = Requests::find($id);
+        $data = [
+            'type' => (int)$request->type,
+            'user_id' => Auth::id(),
+            'manager_id' => (int)$request->manager_id,
+            'content' => $request->content_request,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            '_token' => $request->_token,
+        ];
+        $modal->fill($data)->save();
+        Mail::to($managers->email)->send(new ChangeRequestNotification($modal));
         return redirect(route('request'));
     }
     public function getRequestByWeek()

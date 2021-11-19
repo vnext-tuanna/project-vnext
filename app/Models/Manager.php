@@ -47,9 +47,9 @@ class Manager extends Authenticatable
         return $this->belongsToMany(Skill::class, 'user_skills', 'manager_id', 'skill_id')
         ->withPivot('manager_id')->wherePivotNotNull('manager_id');
     }
-    // public function managerskill()
-    // {
-    //     // return $this->belongsToMany(UserSkill::class,'user_skills','user_id','skill_id');
-    //     return $this->belongsToMany(UserSkill::class, 'user_skills', 'manager_id', 'skill_id');
-    // }
+//     public function managerskill()
+//     {
+//         // return $this->belongsToMany(UserSkill::class,'user_skills','user_id','skill_id');
+//         return $this->belongsToMany(UserSkill::class, 'user_skills', 'manager_id', 'skill_id');
+//     }
 }
