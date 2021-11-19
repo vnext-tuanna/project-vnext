@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RequestNotification extends Mailable
+class ChangeRequestNotification extends Mailable
 {
     use Queueable, SerializesModels;
     public $request;

@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [RequestController::class, 'index'])->name('request');
         Route::get('add', [RequestController::class, 'create'])->name('request.add');
         Route::post('add', [RequestController::class, 'store']);
+        Route::get('edit/{id}', [RequestController::class, 'edit'])->name('request.edit');
+        Route::post('edit/{id}', [RequestController::class, 'update']);
         Route::get('/request-by-week', [RequestController::class, 'getRequestByWeek'])->name('request.week');
         Route::get('/request-by-month/{month}', [RequestController::class, 'getRequestByMonth'])->name('request.month');
     });

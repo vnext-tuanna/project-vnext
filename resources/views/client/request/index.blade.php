@@ -36,13 +36,15 @@
                         <th scope="col">Status</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
+                        <th scope="col">Action</th>
+
                     </tr>
                     </thead>
                     <tbody>
 
                    @foreach($requests as $key => $request)
                        <tr>
-                           <th scope="row">{{$key++}}</th>
+                           <th scope="row">{{$requests->firstItem() + $key}}</th>
                            <td>{{$request->type == 1? 'In Leave' : ($request->type == 2? 'Leave Out' : 'Leave Early')}}</td>
                            <td>{{$request->content}}</td>
                            <td>{{$request->manager->name}}</td>
@@ -58,6 +60,14 @@
                            </td>
                            <td>{{$request->start_date}}</td>
                            <td>{{$request->end_date}}</td>
+                           <td>
+                               @if($request->status == 0)
+                                   <a href="{{route('request.edit', $request->id)}}"><i class="bi bi-pencil-square"></i></a>
+                               @else
+                                     <span>Can't edit</span>
+                               @endif
+                           </td>
+
                        </tr>
                    @endforeach
                     </tbody>
