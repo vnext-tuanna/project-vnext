@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Manager;
 use App\Models\Requests;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RequestFactory extends Factory
@@ -24,8 +26,8 @@ class RequestFactory extends Factory
         return [
             'type' => $this->faker->name(),
             'content' => $this->faker->paragraph(2),
-            'user_id' => $this->faker->numberBetween($min = 1, $max = 20),
-            'manager_id' => $this->faker->numberBetween($min = 1, $max = 5),
+            'user_id' => User::all()->random()->id,
+            'manager_id' => Manager::all()->random()->id,
             'start_date' => $this->faker->dateTime(),
             'end_date' => $this->faker->dateTime(),
             'status' => $this->faker->numberBetween($min = 0, $max = 1),

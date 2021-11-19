@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Mail\SendMail;
-use App\Mail\TestMail;
 use App\Services\RequestService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -35,8 +34,9 @@ class RequestController extends Controller
     {
         $request = $this->requestService->getRequestById($id);
         $email = $request->user->email;
+        $sub = $request->type;
         $this->requestService->appprove($id);
-        Mail::to($email)->send(new SendMail($request));
+        Mail::to($email)->send(new SendMail($request, $sub));
         return redirect('admin/waiting');
     }
     public function denyWRequest($id)

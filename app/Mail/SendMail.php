@@ -11,14 +11,16 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $request;
+    public $sub;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($request)
+    public function __construct($request, $sub)
     {
         $this->request = $request;
+        $this->sub = $sub;
     }
 
     /**
@@ -28,6 +30,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->view('admin.emails.test');
+        return $this->subject('Yêu cầu ['.$this->sub.'] đã được chấp nhận!')
+                    ->view('admin.emails.test');
     }
 }

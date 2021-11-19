@@ -15,13 +15,13 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
-            $table->string('type');
-            $table->longText('content');
+            $table->integer('type');
+            $table->string('content');
             $table->bigInteger('user_id');
             $table->bigInteger('manager_id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->unsignedSmallInteger('status');
+            $table->unsignedSmallInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
