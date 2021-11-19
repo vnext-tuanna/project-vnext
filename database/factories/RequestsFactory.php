@@ -24,7 +24,7 @@ class RequestsFactory extends Factory
     public function definition()
     {
         return [
-            'type' => $this->faker->name(),
+            'type' => $this->faker->numberBetween($min = 0, $max = 2),
             'content' => $this->faker->paragraph(2),
             'user_id' => User::all()->random()->id,
             'manager_id' => Manager::all()->random()->id,

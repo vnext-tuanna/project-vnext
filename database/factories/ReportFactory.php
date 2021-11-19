@@ -23,7 +23,7 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            'content ' => $this->faker->paragraph(2),
+            'description' => $this->faker->paragraph(2),
             'user_id' => User::all()->random()->id,
         ];
     }
