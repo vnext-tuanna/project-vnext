@@ -15,8 +15,8 @@ class LoginController extends Controller
     public function loginAdmin(Request $request)
     {
         $remember = $request->remember ? true : false;
-        $credentials = $request->only(['email', 'password']);
-        if (Auth::guard('manager')->attempt($credentials, $remember)) {
+        // dd($credentials);
+        if (Auth::guard('manager')->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect('admin/dashboards');
         } else {
             return redirect()->back()->with('msg', 'You are not authorized to access');

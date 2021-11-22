@@ -20,7 +20,7 @@ class LoginMiddleware
         if (Auth::guard('manager')->check() && Auth::guard('manager')->user()->role == 1 || Auth::guard('manager')->check() && Auth::guard('manager')->user()->role == 2) {
             return $next($request);
         } else {
-            return redirect()->back()->with('error', 'You are not authorized to access');
+            return redirect()->route('admin.login')->with('error', 'You are not authorized to access');
         }
     }
 }

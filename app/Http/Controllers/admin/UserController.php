@@ -73,7 +73,7 @@ class UserController extends Controller
         $users = $users[0];
         return view('admin.user.edit', compact('users', 'divisions', 'positions', 'skills', 'userskills'));
     }
-    public function update(Request $request, $id)
+    public function update(StoreUserRequest $request, $id)
     {
         $userService = $this->userService->getUserServiceById($id);
         $data = $request->all();

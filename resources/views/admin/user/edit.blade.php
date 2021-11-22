@@ -7,6 +7,9 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
                 <input type="text" class="form-control" name="name" value="{{ $users->name }}">
+                @error('name')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Division</label>
@@ -60,6 +63,9 @@
                     > {{ $skill->name }}</option>
                     @endforeach
                 </select>
+                @error('skill')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="/admin/users" type="submit" class="btn btn-danger">Cancel</a>

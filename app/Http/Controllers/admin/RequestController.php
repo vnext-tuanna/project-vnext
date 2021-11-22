@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Mail\SendMail;
+use App\Models\Requests;
 use App\Services\RequestService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class RequestController extends Controller
@@ -22,8 +25,13 @@ class RequestController extends Controller
     }
     public function index()
     {
-        $requests = $this->requestService->getAllRequests();
-        return view('admin.request.request', compact('requests'));
+        if (Auth::guard('manager')->user()->role == 2) {
+            $requests = $this->requestService->getAllRequests()->where('manager_id', Auth::guard('manager')->id());
+            return view('admin.request.request', compact('requests'));
+        } else {
+            $requests = $this->requestService->getAllRequests();
+            return view('admin.request.request', compact('requests'));
+        }
     }
     public function getWaitingRequest()
     {
@@ -32,17 +40,40 @@ class RequestController extends Controller
     }
     public function approveWRequest($id)
     {
+        $status = 1;
         $request = $this->requestService->getRequestById($id);
         $email = $request->user->email;
-        $sub = $request->type;
+        $sub = $request->type == 1 ? 'In Leave' : ($request->type == 2 ? 'Leave Out' : 'Leave Early');
         $this->requestService->appprove($id);
-        Mail::to($email)->send(new SendMail($request, $sub));
+
+        Mail::to($email)->send(new SendMail($request, $sub, $status));
         return redirect('admin/waiting');
     }
     public function denyWRequest($id)
     {
+        $status = 2;
+        $request = $this->requestService->getRequestById($id);
+        $email = $request->user->email;
+        $sub = $request->type == 1 ? 'In Leave' : ($request->type == 2 ? 'Leave Out' : 'Leave Early');
         $this->requestService->deny($id);
+        Mail::to($email)->send(new SendMail($request, $sub, $status));
         return redirect('admin/waiting');
+    }
+    public function requestByMonth($month)
+    {
+        $requests = Requests::whereMonth('created_at', $month)
+            ->where('manager_id', Auth::guard('manager')->id())
+            ->where('status', 1)
+            ->get();
+        return view('admin.request.request', compact('requests'));
+    }
+    public function requestByWeek()
+    {
+        $getByWeek = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
+        $requests = Requests::where('manager_id', Auth::guard('manager')->id())
+            ->where('status', 1)
+            ->whereBetween('created_at', $getByWeek)->get();
+        return view('admin.request.request', compact('requests'));
     }
     /**
      * Show the form for creating a new resource.

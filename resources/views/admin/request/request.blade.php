@@ -8,6 +8,20 @@
                 <p class="text-danger">{{ session('msg') }}</p>
             @endif
         </div>
+        <div class="col-md-12 col-xs-12 col-lg-12 d-flex justify-content-end" style="display: inline !important;">
+            <a href="{{ route('requests.index') }}" class="btn btn-success">Request All</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Request By Month
+                </button>
+                <ul class="dropdown-menu">
+                    @for($i = 1; $i <= 12; $i++)
+                        <li><a class="dropdown-item" href="{{ route('requestByMonth',$i) }}">Month {{ $i }}</a></li>
+                    @endfor
+                </ul>
+            </div>
+            <a href="{{ route('requestbyWeek') }}" class="btn btn-warning" style="color: white;">Request By Week</a>
+        </div>
         <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
             <thead>
                 <tr>
@@ -24,7 +38,8 @@
                 @foreach ($requests as $requests)
                     <tr>
                         <td>{{ $requests->id }}</td>
-                        <td>{{ $requests->type == 1 ? 'In Leave' : ($requests->type == 2 ? 'Leave Out' : 'Leave Early') }}</td>
+                        <td>{{ $requests->type == 1 ? 'In Leave' : ($requests->type == 2 ? 'Leave Out' : 'Leave Early') }}
+                        </td>
                         <td>
                             <p class="text_content">
                                 {{ $requests->content }}

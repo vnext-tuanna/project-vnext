@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Report;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -24,7 +27,17 @@ class ReportController extends Controller
         $reports = $this->reportService->getAllReports();
         return view('admin.report.report', compact('reports'));
     }
-
+    public function reportByMonth($month)
+    {
+        $reports = Report::whereMonth('created_at', $month)->get();
+        return view('admin.report.report', compact('reports'));
+    }
+    public function reportByWeek()
+    {
+        $getByWeek = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
+        $reports = Report::whereBetween('created_at', $getByWeek)->get();
+        return view('admin.report.report', compact('reports'));
+    }
     /**
      * Show the form for creating a new resource.
      *

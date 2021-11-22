@@ -30,6 +30,7 @@ class RequestController extends Controller
             3 => 'Leave Early',
         ];
         $managers = Manager::where('division_id', Auth::user()->division_id)->first();
+        // dd($managers);
         return view('client.request.add', compact('managers', 'typeRequests'));
     }
     public function store(Request $request)
@@ -44,9 +45,9 @@ class RequestController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ];
-        $modal->fill($data)->save();
-        Mail::to($managers->email)->send(new RequestNotification($modal));
-        return redirect(route('request'));
+            $modal->fill($data)->save();
+            Mail::to($managers->email)->send(new RequestNotification($modal));
+            return redirect(route('request'));
     }
     public function edit($id)
     {

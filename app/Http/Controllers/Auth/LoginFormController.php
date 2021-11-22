@@ -19,7 +19,7 @@ class LoginFormController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             return redirect(route('index'));
         } else {
-            return redirect()->back()->with('msg', 'Incorre1111ct information');
+            return redirect()->back()->with('msg', 'Incorrect information');
         }
     }
 }
