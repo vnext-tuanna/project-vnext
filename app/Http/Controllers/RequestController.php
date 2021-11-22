@@ -95,4 +95,13 @@ class RequestController extends Controller
         $requests->load('manager');
         return view('client.request.index', compact('requests'));
     }
+    public function getRequestByDate(Request $request)
+    {
+        $start = Carbon::parse($request->start);
+        $end = Carbon::parse($request->end);
+        $requests = Requests::where('user_id', Auth::id())
+                            ->whereBetween('created_at', [$start, $end])
+                            ->paginate(5);
+        return view('client.request.index', compact('requests'));
+    }
 }
