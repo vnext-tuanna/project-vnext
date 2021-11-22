@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::post('change/{id}', [ChangePasswordController::class, 'changePassword']);
     Route::prefix('request')->group(function () {
         Route::get('/', [RequestController::class, 'index'])->name('request');
+        Route::post('/', [RequestController::class, 'getRequestByDate']);
         Route::get('add', [RequestController::class, 'create'])->name('request.add');
         Route::post('add', [RequestController::class, 'store']);
         Route::get('edit/{id}', [RequestController::class, 'edit'])->name('request.edit');

@@ -3,6 +3,25 @@
 @section('content')
     <div class="section__request">
         <div class="request__header row">
+            <form action="" class="p-3" method="POST">
+                @csrf
+                <div class="form-row">
+                    <div class="row">
+                        <h2 class="text-center">Filter request by day</h2>
+                        <div class="col">
+                            <label for="">From</label>
+                            <input type="date" class="form-control" placeholder="First name" name="start" >
+                        </div>
+                        <div class="col">
+                            <label for="">To</label>
+                            <input type="date" class="form-control" placeholder="Last name" name="end">
+                        </div>
+                        <div class="submit py-3 float-end">
+                            <button type="submit" class="btn btn-primary px-5">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <div class="col-md-3">
                 <h3>Your request</h3>
             </div>
