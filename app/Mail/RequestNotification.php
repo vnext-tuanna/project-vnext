@@ -11,17 +11,14 @@ class RequestNotification extends Mailable
 {
     use Queueable, SerializesModels;
     public $request;
-    public $token;
-
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($request, $token)
+    public function __construct($request)
     {
         $this->request = $request;
-        $this->token = $token;
     }
 
     /**
@@ -31,7 +28,6 @@ class RequestNotification extends Mailable
      */
     public function build()
     {
-        $url = url('/request/'.$this->token);
-        return $this->view('client.mail.index')->with(['modal' => $this->request, 'url' => $url]);
+        return $this->view('client.mail.index')->with(['modal' => $this->request]);
     }
 }
