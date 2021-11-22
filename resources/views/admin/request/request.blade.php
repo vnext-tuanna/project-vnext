@@ -3,7 +3,11 @@
 @section('content')
     <div class="container">
         <div class="btn-option ">
-            <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
+            <a href="waiting" class="btn btn-sm btn-primary">Waiting List<span class="badge badge-pill badge-danger" style="
+                background:#dc3545;
+                border-radius: 50%;
+                margin-left: 5px;
+            ">{{ $countWRequests }}</span></a>
             @if (session('msg'))
                 <p class="text-danger">{{ session('msg') }}</p>
             @endif

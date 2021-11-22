@@ -25,9 +25,11 @@ class RequestController extends Controller
     }
     public function index()
     {
+        $wRequests = $this->requestService->getWaitingRequests();
+        $countWRequests = $wRequests->count();
         if (Auth::guard('manager')->user()->role == 2) {
             $requests = $this->requestService->getAllRequests()->where('manager_id', Auth::guard('manager')->id());
-            return view('admin.request.request', compact('requests'));
+            return view('admin.request.request', compact('requests', 'countWRequests'));
         } else {
             $requests = $this->requestService->getAllRequests();
             return view('admin.request.request', compact('requests'));
