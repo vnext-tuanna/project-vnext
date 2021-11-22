@@ -7,6 +7,20 @@
                 <p class="text-danger">{{ session('msg') }}</p>
             @endif
         </div>
+        <div class="col-md-12 col-xs-12 col-lg-12 d-flex justify-content-end" style="display: inline !important;">
+            <a href="{{ route('reports.index') }}" class="btn btn-success">Report All</a>
+            <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Report By Month
+                </button>
+                <ul class="dropdown-menu">
+                    @for($i = 1; $i <= 12; $i++)
+                        <li><a class="dropdown-item" href="{{ route('reportByMonth',$i) }}">Month {{ $i }}</a></li>
+                    @endfor
+                </ul>
+            </div>
+            <a href="{{ route('reportbyWeek') }}" class="btn btn-warning" style="color: white;">Report By Week</a>
+        </div>
         <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
             <thead>
                 <tr>
@@ -24,7 +38,7 @@
                         <td>{{ $report->user->name }}</td>
                         <td>
                             <p class="text_content">
-                                {{ $report->content }}
+                                {{ $report->description }}
                             </p>
                             <a href="{{ $report->id }}" id="details" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop{{ $report->id }}">
@@ -43,7 +57,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p class="content_request">{{ $report->content }}</p>
+                                            <p class="content_request">{{ $report->description }}</p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"

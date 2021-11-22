@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Services\DivisionService;
 use App\Services\PositionService;
 use App\Services\SkillService;
@@ -45,7 +46,7 @@ class ManagerController extends Controller
         $managers = $managers[0];
         return view('admin.manager.edit', compact('managers', 'divisions', 'positions', 'skills', 'managerskills'));
     }
-    public function update(Request $request, $id)
+    public function update(StoreUserRequest $request, $id)
     {
         $managerService = $this->managerService->getManagerServiceById($id);
         $data = $request->all();
@@ -56,7 +57,7 @@ class ManagerController extends Controller
         if ($request->role == 3) {
             $userService = $this->userService->storeUser($data);
             $userService->skills()->attach($request->skill);
-            $this->managerService->delete($id);
+            $this->managerService->destroy($id);
             return redirect('admin/managers');
         } else {
             $managerService->update($data);

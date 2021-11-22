@@ -32,10 +32,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.login'], function () {
     Route::resource('users', UserController::class);
     Route::resource('managers', ManagerController::class);
     Route::resource('reports', ReportController::class);
+    Route::get('/report-by-week', [ReportController::class, 'reportByWeek'])->name('reportbyWeek');
+    Route::get('/report-by-month/{month}', [ReportController::class, 'reportByMonth'])->name('reportByMonth');
     Route::get('waiting', [RequestController::class, 'getWaitingRequest']);
     Route::get('approve/{id}', [RequestController::class, 'approveWRequest']);
     Route::get('deny/{id}', [RequestController::class, 'denyWRequest']);
     Route::resource('requests', RequestController::class);
+    Route::get('/request-by-week', [RequestController::class, 'requestByWeek'])->name('requestbyWeek');
+    Route::get('/request-by-month/{month}', [RequestController::class, 'requestByMonth'])->name('requestByMonth');
     Route::resource('divisions', DivisionController::class);
     Route::resource('positions', PositionController::class);
     Route::resource('skills', SkillController::class);

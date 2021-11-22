@@ -19,5 +19,6 @@
     <li>Content: <strong> {{$modal->content}}</strong></li>
 </ul>
 <p>Please go to website, check and do action if you want.</p>
+
 </body>
 </html>

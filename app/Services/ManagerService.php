@@ -36,6 +36,11 @@ class ManagerService extends BaseService
     {
         return $this->managerRepository->delete($id);
     }
+    public function destroy($id)
+    {
+        $managers = $this->managerRepository->find($id);
+        return $managers->forceDelete($managers);
+    }
 
     public function getManagerServiceById($id)
     {

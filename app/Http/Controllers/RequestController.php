@@ -31,6 +31,7 @@ class RequestController extends Controller
             3 => 'Leave Early',
         ];
         $managers = Manager::where('division_id', Auth::user()->division_id)->first();
+        // dd($managers);
         return view('client.request.add', compact('managers', 'typeRequests'));
     }
     public function store(RequestForm $request)
