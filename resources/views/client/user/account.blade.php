@@ -35,10 +35,8 @@
                 <div class="col-md-6  col-xl-3">
                     <div class="user-info-account  p-3 ">
                         <div class="content__title text-center" style="margin: auto">
-
                             <h2 style="margin-top: 30px; opacity: .5">{{$user->position->name}}</h2>
-                            <p style="font-size: 5rem" class="text-muted fw-bold">{{$user->division->name}}</p>
-
+                            <p style="font-size: 2rem" class="text-muted fw-bold">{{$user->division->name}}</p>
                         </div>
                     </div>
                 </div>

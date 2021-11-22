@@ -20,7 +20,7 @@ mix.js('resources/js/app.js', publicJsFolder)
     // .js('resources/js/validation.js', publicJsFolder)
     .css('resources/css/style.css', clientCss)
     .css('resources/css/admin.css', clientCss)
-
+    .sass('resources/css/style.scss', clientCss)
     .sass('resources/scss/app.scss', publicCssFolder)
 
 

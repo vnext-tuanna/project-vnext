@@ -80,8 +80,9 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReportRequest $request, $id)
     {
+        $request->validated();
         $modal = Report::find($id);
         $data = [
             'user_id' => Auth::id(),

@@ -6,15 +6,20 @@
             <hr>
         </div>
         <form action="{{route('report.update', [$report->id])}}" method="POST">
+            @method('PUT')
             @csrf
             <div class="form-group mt-3">
                 <label for="">Title</label>
-                <input type="text" class="form-control" value="{{old('title', $report->title)}}" name="title">
+                <input type="text" class="form-control"  value="{{old('title', $report->title)}}" name="title">
+                @error('title')  <p style="color: red">{{$message}}</p> @enderror
             </div>
             <div class="form-group mt-3">
                 <label><strong>Content</strong></label>
-                <textarea class="ckeditor form-control"  name="description">{{old('title', $report->description)}}</textarea>
+                <textarea class="ckeditor form-control"  name="description">{{old('description', $report->description)}}</textarea>
             </div>
+            @error('description')
+            <p style="color: red">{{$message}}</p>
+            @enderror
             <button class="btn  mt-3" style="background-color: #0a3d62; color: white">Update Report</button>
         </form>
     </div>

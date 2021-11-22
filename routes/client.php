@@ -9,23 +9,6 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\FollowController;
 
-Route::get('/', function () {
-    return view('client.login');
-});
-Route::get('/client/user', function () {
-    return view('client.user.index');
-});
-Route::get('/client/profile', function () {
-    return view('client.user.profile');
-});
-
-Route::get('/request', function () {
-    return view('client.request.index');
-});
-Route::get('/request/add', function () {
-    return view('client.request.add');
-})->name('request.add');
-
 Route::get('auth/{driver}', [AuthenticateController::class, 'loginSocialPlatform'])->name('auth');
 Route::get('auth/{driver}/callback', [AuthenticateController::class, 'callbackFromPlatform']);
 Route::get('/', [LoginFormController::class, 'loginForm'])->name('login');

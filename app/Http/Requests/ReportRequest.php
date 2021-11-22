@@ -23,9 +23,20 @@ class ReportRequest extends FormRequest
      */
     public function rules()
     {
+        return $this->isMethod('POST') ? $this->store() : $this->update();
+    }
+    public function store()
+    {
         return [
-            'title' => 'required|min:10',
-            'description' => 'required|min:10',
+            'title' => 'required',
+            'description' => 'required',
+        ];
+    }
+    public function update()
+    {
+        return [
+            'title' => 'sometimes|required',
+            'description' => 'sometimes|required',
         ];
     }
     public function messages()
