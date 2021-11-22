@@ -8,7 +8,7 @@
         </div>
         <hr>
         <form action="" method="POST"  id="addForm" enctype="multipart/form-data">
-            @if(\Illuminate\Support\Facades\Session::get('success'))
+            @if(Session::get('msg'))
                 <p class="text-center p-3 bg-success text-white">Change password success</p>
             @endif
             @csrf

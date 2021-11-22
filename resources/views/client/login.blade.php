@@ -26,10 +26,7 @@
                 <form action="" method="POST">
                     @csrf
                     @if(session('msg'))
-                        <p class="text-danger">{{session('msg')}}</p>
-                    @endif
-                    @if(session('error'))
-                        <p class="text-danger">{{session('error')}}</p>
+                        <p class="text-danger text-center">{{session('msg')}}</p>
                     @endif
                     <div class="mb-3">
                         <label class="form-label">Email</label>
@@ -38,7 +35,6 @@
                     <div class="mb-3">
                         <label class="form-label d-flex justify-content-between">
                             <span>Password</span>
-                            <a href="" class="text-primary">Forgot Password?</a>
                         </label>
                         <input type="password" name="password" class="form-control form-input">
                     </div>
@@ -51,7 +47,7 @@
                         <a href="{{route('auth', 'facebook')}}" class="btn btn-login btn-facebook mt-2"> <i class="bi bi-facebook"></i> Login with Facebook</a>
                         <a href="{{route('auth', 'google' )}}" class="btn btn-login btn-google mt-2"> <img src="{{asset('images/icons8-google.svg')}}" alt=""> Login with Google</a>
                         <a href="{{route('auth', 'github' )}}" class="btn btn-login btn-google mt-2"> <img src="{{asset('images/icons8-google.svg')}}" alt=""> Login with Github</a>
-                        
+
                     </div>
                 </form>
             </div>

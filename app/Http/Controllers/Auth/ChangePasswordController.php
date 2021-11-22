@@ -21,8 +21,8 @@ class ChangePasswordController extends Controller
         $userPassword = $user->password;
         $request->validate([
             'current' => 'required',
-            'new' => 'required|same:confirm',
-            'confirm' => 'required',
+            'new' => 'required|same:confirm|min:6',
+            'confirm' => 'required|min:6',
         ]);
 
         if (!Hash::check($request->current, $userPassword)) {
@@ -32,6 +32,6 @@ class ChangePasswordController extends Controller
         $user->password = Hash::make($request->new);
 
         $user->save();
-        return redirect()->back();
+        return redirect()->back()->with('msg', 'Change password success');
     }
 }

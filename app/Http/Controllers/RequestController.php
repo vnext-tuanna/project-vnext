@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestForm;
 use App\Mail\ChangeRequestNotification;
 use App\Mail\RequestNotification;
 use App\Models\Manager;
@@ -32,7 +33,7 @@ class RequestController extends Controller
         $managers = Manager::where('division_id', Auth::user()->division_id)->first();
         return view('client.request.add', compact('managers', 'typeRequests'));
     }
-    public function store(Request $request)
+    public function store(RequestForm $request)
     {
         $managers = Manager::where('division_id', Auth::user()->division_id)->first();
         $modal = new Requests();
@@ -45,7 +46,7 @@ class RequestController extends Controller
             'end_date' => $request->end_date,
         ];
         $modal->fill($data)->save();
-        Mail::to($managers->email)->send(new RequestNotification($modal));
+        Mail::to($managers->email)->send(new RequestNotification($modal, $request->_token));
         return redirect(route('request'));
     }
     public function edit($id)
@@ -58,8 +59,9 @@ class RequestController extends Controller
         $request = Requests::find($id);
         return view('client.request.edit', compact('request', 'typeRequests'));
     }
-    public function update(Request $request, $id)
+    public function update(RequestForm $request, $id)
     {
+        $request->validated();
         $managers = Manager::where('division_id', Auth::user()->division_id)->first();
         $modal = Requests::find($id);
         $data = [
