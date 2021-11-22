@@ -1,10 +1,5 @@
 /*-------------menu header and side bar ------------*/
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap');
-
-body {
-    font-family: 'Nunito', sans-serif;
-}
-
 :root {
     --header-height: 3rem;
     --nav-width: 70px;
@@ -15,18 +10,25 @@ body {
     --normal-font-size: 1rem;
     --z-fixed: 100;
     --hover-link: #40739e;
+    --error-color: red;
+    --shadow: 1px 10px 9px -5px rgba(54, 54, 54, 0.61);
 }
 
+body {
+    font-family: 'Nunito', sans-serif;
+    a {
+        text-decoration: none
+    }
+    .error{
+        color: var(--error-color);
+        margin: 10px 0 0 10px !important;
+    }
+}
 *,
 ::before,
 ::after {
     box-sizing: border-box
 }
-.error{
-    color: red;
-    margin: 10px 0 0 10px !important;
-}
-
 #body-pd {
     position: relative;
     margin: var(--header-height) 0 0 0;
@@ -35,11 +37,6 @@ body {
     font-size: var(--normal-font-size);
     transition: .5s
 }
-
-a {
-    text-decoration: none
-}
-
 .header {
     width: 100%;
     height: var(--header-height);
@@ -53,17 +50,13 @@ a {
     background-color: var(--white-color);
     z-index: var(--z-fixed);
     transition: .5s;
-    box-shadow: 1px 10px 9px -5px rgba(54, 54, 54, 0.61);
-    -webkit-box-shadow: 1px 10px 9px -5px rgba(54, 54, 54, 0.61);
-    -moz-box-shadow: 1px 10px 9px -5px rgba(54, 54, 54, 0.61);
+    box-shadow: var(--shadow);
+    .header_toggle {
+        color: black;
+        font-size: 1.5rem;
+        cursor: pointer
+    }
 }
-
-.header_toggle {
-    color: black;
-    font-size: 1.5rem;
-    cursor: pointer
-}
-
 .l-navbar {
     position: fixed;
     top: 0;
@@ -74,93 +67,57 @@ a {
     padding: .5rem 1rem 0 0;
     transition: .5s;
     z-index: var(--z-fixed);
-    box-shadow: 9px 1px 9px -5px rgba(54, 54, 54, 0.61);
-    -webkit-box-shadow: 9px 1px 9px -5px rgba(54, 54, 54, 0.61);
-    -moz-box-shadow: 9px 1px 9px -5px rgba(54, 54, 54, 0.61);
+    box-shadow: var(--shadow);
+    .nav {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        .nav_link {
+            position: relative;
+            color: var(--first-color-light);
+            margin-bottom: 1.5rem;
+            transition: .3s;
+            display: grid;
+            grid-template-columns: max-content max-content;
+            align-items: center;
+            column-gap: 1rem;
+            padding: .5rem 0 .5rem 1.5rem;
+            .nav_icon {
+                font-size: 1.25rem
+            }
+            &:hover {
+                color: var(--hover-link)
+            }
+        }
+    }
 }
-
-.nav {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden
-}
-
-.nav_logo,
-.nav_link {
-    display: grid;
-    grid-template-columns: max-content max-content;
-    align-items: center;
-    column-gap: 1rem;
-    padding: .5rem 0 .5rem 1.5rem
-}
-
-.nav_logo {
-    margin-bottom: 2rem
-}
-
-.nav_logo-icon {
-    font-size: 1.25rem;
-    color: black;
-}
-
-.nav_logo-name {
-    color: var(--first-color-light);
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.nav_link {
-    position: relative;
-    color: var(--first-color-light);
-    margin-bottom: 1.5rem;
-    transition: .3s
-}
-
-.nav_link:hover {
-    color: var(--hover-link)
-}
-
-.nav_icon {
-    font-size: 1.25rem
-}
-
 .show {
     left: 0;
 }
-
 .body-pd {
     padding-left: calc(var(--nav-width) + 20px);
 }
-
 .active {
     color: #c23616;
 }
-
-
 main {
     margin-top: 100px;
 }
-
-
 @media screen and (min-width: 768px) {
     #body-pd {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
         padding-left: calc(var(--nav-width) + 2rem)
     }
-
     .header {
         height: calc(var(--header-height) + 1rem);
         padding: 0 2rem 0 calc(var(--nav-width) + 2rem)
     }
-
-
     .l-navbar {
         left: 0;
         padding: 1rem 1rem 0 0
     }
-
     .show {
         width: calc(var(--nav-width) + 150px)
     }
@@ -176,47 +133,43 @@ main {
     height: 100vh;
 }
 
-.section__login__body .body__left {
-    background-color: #1e272e;
-    height: 100vh;
-    box-shadow: 11px 2px 12px -8px rgba(54, 54, 54, 1);
+.section__login__body{
+    .body__left {
+        background-color: #1e272e;
+        height: 100vh;
+        box-shadow: 11px 2px 12px -8px rgba(54, 54, 54, 1);
+        i {
+            font-size: 4rem;
+        }
+    }
+    .body__right {
+        background-color: white;
+        height: 100vh;
+    }
 }
-
-.section__login__body .body__right {
-    background-color: white;
-    height: 100vh;
-}
-
-.body__left i {
-    font-size: 4rem;
-}
-
 .body__login form {
     width: 60%;
     margin: auto;
-}
-
-.body__login form input {
-    background-color: #f1f2f6;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-}
-
-.body__login form .form-input {
-    height: 45px;
-}
-
-.body__login form input:focus {
-    outline: 0 !important;
-    background-color: #ced6e0;
-}
-.body__login form .check-box{
-    background-color: #485460;
-}
-.body__login form .check-box:focus{
-    box-shadow: none;
-    background-color: black;
+    input {
+        background-color: #f1f2f6;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        &:focus {
+            outline: 0 !important;
+            background-color: #ced6e0;
+        }
+    }
+    .form-input {
+        height: 45px;
+    }
+    .check-box{
+        background-color: #485460;
+        &:focus{
+            box-shadow: none;
+            background-color: black;
+        }
+    }
 }
 .btn-login{
     border: 1px solid;
@@ -268,17 +221,15 @@ main {
     height:100px;
     border-radius: 10px;
 }
-.menu__link li a{
-    text-decoration: none;
-    color: black;
-
-}
 .menu__link li{
     margin-top: 5px;
     padding: 5px;
     background-color: #dfe4ea;
     border-radius: 10px;
-
+    a{
+        text-decoration: none;
+        color: black;
+    }
 }
 .follow__list .image img{
     width: 50px;

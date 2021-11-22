@@ -10,6 +10,7 @@
 </head>
 <body>
 <p>Hello, <strong>{{$modal->manager->name}}</strong></p>
+<p>KK</p>
 <p>You have an request from:</p>
 <ul>
     <li>Name: <strong>{{$modal->user->name}}</strong></li>

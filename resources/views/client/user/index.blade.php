@@ -12,7 +12,7 @@
                         <div class="user-info  p-3 ">
                             <div class="d-flex content__title">
                                 <div class="flex-shrink-0 image">
-                                    @if(Str::contains($u->image, asset('storage')))
+                                    @if(Str::contains($u->image, 'images/user'))
                                         <img src="{{asset('storage/'. $u->image)}}" width="60px" height="60px"
                                              alt="">
                                     @else
@@ -23,19 +23,22 @@
                                 <div class="flex-grow-0 ms-3 name">
                                     <span class=" fs-4 fw-bold">{{$u->name}}</span>
                                     <br>
-                                    <span>PHP Developer</span>
+                                    <span>{{$u->position->name}}</span>
                                 </div>
                             </div>
                             <div class="content__info">
                                 <ul class="list-unstyled">
                                     <li><i class="bi bi-envelope"></i> {{$u->email}}</li>
-                                    <li><i class="bi bi-code-slash"></i> PHP, Laravel, Javascript</li>
-
+                                    <li><i class="bi bi-code-slash"></i>
+                                    @foreach($u->skills as $skill)
+                                        <span>{{$skill->name}},</span>
+                                        @endforeach
+                                    </li>
                                 </ul>
                             </div>
                             <div class="content__action text-center">
                                 @if($user->isFollowing($u->id))
-                                    <a href="{{route('follow', $u->id)}}" class="btn btn-follow">Unfollow</a>
+                                    <a href="{{route('follow', $u->id)}}" class="btn btn-follow" style="background-color: #4a69bd">Unfollow</a>
                                 @else
                                     <a href="{{route('follow', $u->id)}}" class="btn btn-follow">Follow</a>
                                 @endif
