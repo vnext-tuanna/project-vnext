@@ -1,7 +1,7 @@
 @extends('layouts.dashboard',['name'=>'Edit User'])
 @section('content')
     <div class="container">
-        <form action="{{ url('admin/users/' . $users->id) }}" method="post">
+        <form action="{{ url('admin/users/'.$users->id) }}" method="post">
             @method('PUT')
             @csrf
             <div class="mb-3">

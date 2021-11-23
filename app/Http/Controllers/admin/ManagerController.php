@@ -51,8 +51,8 @@ class ManagerController extends Controller
         $managerService = $this->managerService->getManagerServiceById($id);
         $data = $request->all();
         $data['email'] = $managerService->email;
-        $data['position_id'] = $managerService->position_id;
-        $data['division_id'] = $managerService->division_id;
+        $data['position_id'] = $request->position;
+        $data['division_id'] = $request->division;
         $data['password'] = $managerService->password;
         if ($request->role == 3) {
             $userService = $this->userService->storeUser($data);
@@ -62,7 +62,7 @@ class ManagerController extends Controller
         } else {
             $managerService->update($data);
             $managerService->skills()->sync($request->skill);
-             return redirect('/admin/managers');
+            return redirect('/admin/managers');
         }
     }
     public function destroy($id)

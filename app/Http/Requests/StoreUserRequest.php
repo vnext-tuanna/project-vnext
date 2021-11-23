@@ -23,10 +23,21 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
+        return $this->isMethod('POST') ? $this->store() : $this->update();
+    }
+    public function store()
+    {
         return [
             'name' => 'required|max:255',
             'email' => 'email:rfc,dns',
             'password' => 'required|min:6',
+            'skill' => 'required',
+        ];
+    }
+    public function update()
+    {
+        return [
+            'name' => 'required|max:255',
             'skill' => 'required',
         ];
     }

@@ -16,7 +16,6 @@
     <li>Time: <strong>{{$modal->start_date}} to {{$modal->end_date}}</strong></li>
     <li>Content: <strong> {{$modal->content}}</strong></li>
 </ul>
-<a href="">{{$url}}</a>
 <p>Please go to website, check and do action if you want.</p>
 </body>
 </html>

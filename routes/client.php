@@ -14,7 +14,7 @@ Route::get('auth/{driver}/callback', [AuthenticateController::class, 'callbackFr
 Route::get('/', [LoginFormController::class, 'loginForm'])->name('login');
 Route::post('/', [LoginFormController::class, 'login']);
 Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'check.login')->group(function () {
     Route::get('/homepage', function () {
         return view('client.index');
     })->name('index');

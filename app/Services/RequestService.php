@@ -22,7 +22,7 @@ class RequestService extends BaseService
      */
     public function getAllRequests(): Collection
     {
-        return $this->requestRepository->with('user', 'manager')->where('status', 1)->get();
+        return $this->requestRepository->with('user', 'manager')->where('manager_id', Auth::guard('manager')->id()) ->where('status', 1)->get();
     }
     public function getWaitingRequests(): Collection
     {

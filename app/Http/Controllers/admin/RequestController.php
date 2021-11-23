@@ -25,13 +25,12 @@ class RequestController extends Controller
     }
     public function index()
     {
-        $wRequests = $this->requestService->getWaitingRequests();
-        $countWRequests = $wRequests->count();
         if (Auth::guard('manager')->user()->role == 2) {
-            $requests = $this->requestService->getAllRequests()->where('manager_id', Auth::guard('manager')->id());
-            return view('admin.request.request', compact('requests', 'countWRequests'));
-        } else {
+            $count = count(Requests::where('status', 0)->where('manager_id', Auth::guard('manager')->id())->get());
             $requests = $this->requestService->getAllRequests();
+            return view('admin.request.request', compact('requests', 'count'));
+        } else {
+            $requests = Requests::all()->where('status', 1);
             return view('admin.request.request', compact('requests'));
         }
     }
@@ -47,8 +46,7 @@ class RequestController extends Controller
         $email = $request->user->email;
         $sub = $request->type == 1 ? 'In Leave' : ($request->type == 2 ? 'Leave Out' : 'Leave Early');
         $this->requestService->appprove($id);
-
-        Mail::to($email)->send(new SendMail($request, $sub, $status));
+        Mail::to($email)->queue(new SendMail($request, $sub, $status));
         return redirect('admin/waiting');
     }
     public function denyWRequest($id)
@@ -58,24 +56,27 @@ class RequestController extends Controller
         $email = $request->user->email;
         $sub = $request->type == 1 ? 'In Leave' : ($request->type == 2 ? 'Leave Out' : 'Leave Early');
         $this->requestService->deny($id);
-        Mail::to($email)->send(new SendMail($request, $sub, $status));
+        Mail::to($email)->queue(new SendMail($request, $sub, $status));
         return redirect('admin/waiting');
     }
     public function requestByMonth($month)
     {
+        $count = count(Requests::where('status', 0)->where('manager_id', Auth::guard('manager')->id())->get());
         $requests = Requests::whereMonth('created_at', $month)
             ->where('manager_id', Auth::guard('manager')->id())
             ->where('status', 1)
             ->get();
-        return view('admin.request.request', compact('requests'));
+        return view('admin.request.request', compact('requests', 'count'));
     }
-    public function requestByWeek()
+    public function requestByDate(Request $request)
     {
-        $getByWeek = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
+        $count = count(Requests::where('status', 0)->where('manager_id', Auth::guard('manager')->id())->get());
+        $start = Carbon::parse($request->start);
+        $end = Carbon::parse($request->end);
         $requests = Requests::where('manager_id', Auth::guard('manager')->id())
             ->where('status', 1)
-            ->whereBetween('created_at', $getByWeek)->get();
-        return view('admin.request.request', compact('requests'));
+            ->whereBetween('created_at', [$start, $end])->get();
+        return view('admin.request.request', compact('requests', 'count'));
     }
     /**
      * Show the form for creating a new resource.

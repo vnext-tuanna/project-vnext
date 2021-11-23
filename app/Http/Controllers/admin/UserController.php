@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Mail\SendMail;
+use App\Models\Requests;
 use App\Services\DivisionService;
 use App\Services\ManagerService;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +13,8 @@ use App\Services\SkillService;
 use App\Services\UserService;
 use App\Services\UserSkillService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -63,6 +67,7 @@ class UserController extends Controller
             return redirect('admin/managers');
         }
     }
+
     public function edit($id)
     {
         $divisions = $this->divisionService->getAllDivisions();
@@ -78,12 +83,13 @@ class UserController extends Controller
         $userService = $this->userService->getUserServiceById($id);
         $data = $request->all();
         $data['email'] = $userService->email;
-        $data['position_id'] = $userService->position_id;
-        $data['division_id'] = $userService->division_id;
+        $data['position_id'] = $request->position;
+        $data['division_id'] = $request->division;
         $data['password'] = $userService->password;
         if ($request->role == 3) {
             $userService->update($data);
             $userService->skills()->sync($request->skill);
+
             return redirect('/admin/users');
         } else {
             $managerService = $this->managerService->storeManager($data);

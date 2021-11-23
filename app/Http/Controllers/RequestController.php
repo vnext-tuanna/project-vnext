@@ -47,7 +47,7 @@ class RequestController extends Controller
             'end_date' => $request->end_date,
         ];
         $modal->fill($data)->save();
-        Mail::to($managers->email)->send(new RequestNotification($modal));
+        Mail::to($managers->email)->queue(new RequestNotification($modal));
         return redirect(route('request'));
     }
     public function edit($id)
