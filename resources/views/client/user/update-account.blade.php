@@ -3,14 +3,14 @@
 @section('content')
     <div class="section__report p-3">
         <div class="report__head">
-            <h4>Report</h4>
+            <h4>Update Profile</h4>
             <hr>
         </div>
         <form action="{{route('user.update', $user->id)}}" method="POST"  id="addForm" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group mt-3">
-                <label for="">Title</label>
+                <label for="">Name</label>
                 <input type="text" class="form-control" name="name" value="{{old('name', $user->name)}}">
             </div>
             <div class="form-group mt-3">

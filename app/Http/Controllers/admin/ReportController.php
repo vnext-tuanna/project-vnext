@@ -38,6 +38,14 @@ class ReportController extends Controller
         $reports = Report::whereBetween('created_at', $getByWeek)->get();
         return view('admin.report.report', compact('reports'));
     }
+    public function reportByDate(Request $request)
+    {
+        $start = Carbon::parse($request->start);
+        $end = Carbon::parse($request->end);
+        $reports = Report::all()
+            ->whereBetween('created_at', [$start, $end]);
+        return view('admin.report.report', compact('reports'));
+    }
     /**
      * Show the form for creating a new resource.
      *

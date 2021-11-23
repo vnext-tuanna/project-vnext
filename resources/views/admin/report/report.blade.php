@@ -7,6 +7,25 @@
                 <p class="text-danger">{{ session('msg') }}</p>
             @endif
         </div>
+        <form action="{{ route('reportByDate') }}" class="p-3" method="POST">
+            @csrf
+            <div class="form-row">
+                <div class="row">
+                    <h3 class="text-center">Filter request by date</h3>
+                    <div class="col">
+                        <label for="">From</label>
+                        <input type="date" class="form-control" placeholder="First name" name="start" >
+                    </div>
+                    <div class="col">
+                        <label for="">To</label>
+                        <input type="date" class="form-control" placeholder="Last name" name="end">
+                    </div>
+                    <div class="submit py-3 float-end">
+                        <button type="submit" style="float: right;" class="btn btn-primary px-5">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="col-md-12 col-xs-12 col-lg-12 d-flex justify-content-end" style="display: inline !important;">
             <a href="{{ route('reports.index') }}" class="btn btn-success">Report All</a>
             <div class="btn-group">
@@ -38,7 +57,7 @@
                         <td>{{ $report->user->name }}</td>
                         <td>
                             <p class="text_content">
-                                {{ $report->description }}
+                                {{ strip_tags($report->description) }}
                             </p>
                             <a href="{{ $report->id }}" id="details" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop{{ $report->id }}">

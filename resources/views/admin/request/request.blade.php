@@ -3,11 +3,39 @@
 @section('content')
     <div class="container">
         <div class="btn-option ">
-            <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
+            @if (Auth::guard('manager')->user()->role == 2)
+                <a href="waiting" class="btn btn-sm btn-primary">Waiting List<span class="badge badge-pill badge-danger" style="
+                    background:#dc3545;
+                    border-radius: 50%;
+                    margin-left: 5px;
+                ">{{ $count }}</span></a>
+            @else
+                <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
+            @endif
+            
             @if (session('msg'))
                 <p class="text-danger">{{ session('msg') }}</p>
             @endif
         </div>
+        <form action="{{ route('requestByDate') }}" class="p-3" method="POST">
+            @csrf
+            <div class="form-row">
+                <div class="row">
+                    <h3 class="text-center">Filter request by date</h3>
+                    <div class="col">
+                        <label for="">From</label>
+                        <input type="date" class="form-control" placeholder="First name" name="start" >
+                    </div>
+                    <div class="col">
+                        <label for="">To</label>
+                        <input type="date" class="form-control" placeholder="Last name" name="end">
+                    </div>
+                    <div class="submit py-3 float-end">
+                        <button type="submit" style="float: right;" class="btn btn-primary px-5">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="col-md-12 col-xs-12 col-lg-12 d-flex justify-content-end" style="display: inline !important;">
             <a href="{{ route('requests.index') }}" class="btn btn-success">Request All</a>
             <div class="btn-group">
@@ -20,7 +48,6 @@
                     @endfor
                 </ul>
             </div>
-            <a href="{{ route('requestbyWeek') }}" class="btn btn-warning" style="color: white;">Request By Week</a>
         </div>
         <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width: 100%">
             <thead>
