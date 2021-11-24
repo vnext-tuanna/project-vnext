@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportRequest;
+use App\Models\Manager;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,8 @@ class ReportController extends Controller
      */
     public function create()
     {
-        return view('client.report.add');
+        $managers = Manager::where('division_id', Auth::user()->division_id)->first();
+        return view('client.report.add', compact('managers'));
     }
 
     /**
@@ -44,6 +46,7 @@ class ReportController extends Controller
           'user_id' => Auth::id(),
           'description' => $request->description,
           'title' => $request->title,
+            'manager_id' => $request->manager_id,
         ];
         $modal->fill($data)->save();
         return redirect('report');
@@ -70,7 +73,8 @@ class ReportController extends Controller
     public function edit($id)
     {
         $report = Report::find($id);
-        return view('client.report.update', compact('report'));
+        $managers = Manager::where('division_id', Auth::user()->division_id)->first();
+        return view('client.report.update', compact('report', 'managers'));
     }
 
     /**
@@ -88,6 +92,7 @@ class ReportController extends Controller
             'user_id' => Auth::id(),
             'description' => $request->description,
             'title' => $request->title,
+            'manager_id' => $request->manager_id,
         ];
         $modal->fill($data)->save();
         return redirect('report');
