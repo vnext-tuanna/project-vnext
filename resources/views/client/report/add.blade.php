@@ -11,12 +11,18 @@
             @method('POST')
             <div class="form-group mt-3">
                 <label for="">Title</label>
-                <input type="text" class="form-control" @error('title') placeholder="{{$message}}" @enderror name="title">
+                <input type="text" class="form-control" value="{{ old('title') }}" @error('title') placeholder="{{$message}}" @enderror name="title">
+            </div>
+            <div class="form-group mt-3 mb-3">
+                <label for="inputAddress2">Manager</label>
+                <select id="inputState" class="form-control" name="manager_id" >
+                    <option value="{{$managers->id}}">{{$managers->name}}</option>
+                </select>
             </div>
             <div class="form-group mt-3">
                 <label><strong>Content</strong></label>
 
-                <textarea class="ckeditor form-control" name="description"></textarea>
+                <textarea class="ckeditor form-control" name="description">{{ old('description') }}</textarea>
                 @error('description')
                 <p style="color: red">{{$message}}</p>
                 @enderror

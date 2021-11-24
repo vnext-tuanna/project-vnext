@@ -12,10 +12,8 @@ class Report extends Model
     protected $table = 'reports';
     // CLIENT
 
-    public $fillable = ['description', 'user_id', 'title'];
-    // // =======
+    public $fillable = ['description', 'user_id', 'title', 'manager_id'];
 
-    //admin
     public function user()
     {
         return $this->belongsTo(User::class)->withTrashed();
