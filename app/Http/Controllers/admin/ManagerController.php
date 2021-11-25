@@ -58,16 +58,19 @@ class ManagerController extends Controller
             $userService = $this->userService->storeUser($data);
             $userService->skills()->attach($request->skill);
             $this->managerService->destroy($id);
+            smilify('success', 'The user has been updated successfully.');
             return redirect('admin/managers');
         } else {
             $managerService->update($data);
             $managerService->skills()->sync($request->skill);
+            smilify('success', 'The user has been updated successfully.');
             return redirect('/admin/managers');
         }
     }
     public function destroy($id)
     {
         $this->managerService->delete($id);
+        smilify('success', 'Deleted Successfully!');
         return redirect('admin/users');
     }
 }
