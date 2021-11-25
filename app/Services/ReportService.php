@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\ReportRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class ReportService extends BaseService
 {
@@ -21,7 +22,11 @@ class ReportService extends BaseService
      */
     public function getAllReports(): Collection
     {
-        return $this->reportRepository->with('user')->all();
+        return $this->reportRepository->with('user', 'manager')->all();
+    }
+    public function getReportsByManager(): Collection
+    {
+        return $this->reportRepository->with('user', 'manager')->where('manager_id', Auth::guard('manager')->id())->get();
     }
     public function delete($id)
     {

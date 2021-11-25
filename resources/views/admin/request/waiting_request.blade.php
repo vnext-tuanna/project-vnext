@@ -16,7 +16,7 @@
                     <th>Type</th>
                     <th>Content</th>
                     <th>From_user</th>
-                    <th>To_user</th>
+                    <th>To_manager</th>
                     <th>Start_date</th>
                     <th>End_date</th>
                     <th>Option</th>

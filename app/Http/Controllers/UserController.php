@@ -16,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::find(Auth::id());
+        // dd(Auth::user());
         $followings = $user->followings;
         $followers = $user->followers;
         return view('client.user.profile', compact('user', 'followings', 'followers'));

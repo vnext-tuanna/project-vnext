@@ -14,7 +14,7 @@
                     <h3 class="text-center">Filter request by date</h3>
                     <div class="col">
                         <label for="">From</label>
-                        <input type="date" class="form-control" placeholder="First name" name="start" >
+                        <input type="date" class="form-control" placeholder="First name" name="start">
                     </div>
                     <div class="col">
                         <label for="">To</label>
@@ -29,12 +29,14 @@
         <div class="col-md-12 col-xs-12 col-lg-12 d-flex justify-content-end" style="display: inline !important;">
             <a href="{{ route('reports.index') }}" class="btn btn-success">Report All</a>
             <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Report By Month
                 </button>
                 <ul class="dropdown-menu">
-                    @for($i = 1; $i <= 12; $i++)
-                        <li><a class="dropdown-item" href="{{ route('reportByMonth',$i) }}">Month {{ $i }}</a></li>
+                    @for ($i = 1; $i <= 12; $i++)
+                        <li><a class="dropdown-item" href="{{ route('reportByMonth', $i) }}">Month {{ $i }}</a>
+                        </li>
                     @endfor
                 </ul>
             </div>
@@ -44,8 +46,10 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Content</th>
+                    <th>Title</th>
+                    <th>From_user</th>
+                    <th>To_manager</th>
+                    <th>Description</th>
                     <th>Time</th>
                     <th>Option</th>
                 </tr>
@@ -54,7 +58,9 @@
                 @foreach ($reports as $report)
                     <tr>
                         <td>{{ $report->id }}</td>
+                        <td>{{ $report->title }}</td>
                         <td>{{ $report->user->name }}</td>
+                        <td>{{ $report->manager->name }}</td>
                         <td>
                             <p class="text_content">
                                 {{ strip_tags($report->description) }}
