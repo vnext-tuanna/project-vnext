@@ -4,15 +4,16 @@
     <div class="container">
         <div class="btn-option ">
             @if (Auth::guard('manager')->user()->role == 2)
-                <a href="waiting" class="btn btn-sm btn-primary">Waiting List<span class="badge badge-pill badge-danger" style="
-                    background:#dc3545;
-                    border-radius: 50%;
-                    margin-left: 5px;
-                ">{{ $count }}</span></a>
+                <a href="waiting" class="btn btn-sm btn-primary">Waiting List<span class="badge badge-pill badge-danger"
+                        style="
+                        background:#dc3545;
+                        border-radius: 50%;
+                        margin-left: 5px;
+                    ">{{ $count }}</span></a>
             @else
                 <a href="waiting" class="btn btn-sm btn-primary">Waiting List</a>
             @endif
-            
+
             @if (session('msg'))
                 <p class="text-danger">{{ session('msg') }}</p>
             @endif
@@ -24,7 +25,7 @@
                     <h3 class="text-center">Filter request by date</h3>
                     <div class="col">
                         <label for="">From</label>
-                        <input type="date" class="form-control" placeholder="First name" name="start" >
+                        <input type="date" class="form-control" placeholder="First name" name="start">
                     </div>
                     <div class="col">
                         <label for="">To</label>
@@ -39,12 +40,14 @@
         <div class="col-md-12 col-xs-12 col-lg-12 d-flex justify-content-end" style="display: inline !important;">
             <a href="{{ route('requests.index') }}" class="btn btn-success">Request All</a>
             <div class="btn-group">
-                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
                     Request By Month
                 </button>
                 <ul class="dropdown-menu">
-                    @for($i = 1; $i <= 12; $i++)
-                        <li><a class="dropdown-item" href="{{ route('requestByMonth',$i) }}">Month {{ $i }}</a></li>
+                    @for ($i = 1; $i <= 12; $i++)
+                        <li><a class="dropdown-item" href="{{ route('requestByMonth', $i) }}">Month
+                                {{ $i }}</a></li>
                     @endfor
                 </ul>
             </div>
@@ -56,7 +59,7 @@
                     <th>Type</th>
                     <th>Content</th>
                     <th>From_user</th>
-                    <th>To_user</th>
+                    <th>To_manager</th>
                     <th>Start_date</th>
                     <th>End_date</th>
                 </tr>

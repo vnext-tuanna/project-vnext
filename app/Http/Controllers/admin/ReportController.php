@@ -24,8 +24,13 @@ class ReportController extends Controller
     }
     public function index()
     {
-        $reports = $this->reportService->getAllReports();
-        return view('admin.report.report', compact('reports'));
+        if (Auth::guard('manager')->user()->role == 1) {
+            $reports = $this->reportService->getAllReports();
+            return view('admin.report.report', compact('reports'));
+        } else {
+            $reports = $this->reportService->getReportsByManager();
+            return view('admin.report.report', compact('reports'));
+        }
     }
     public function reportByMonth($month)
     {

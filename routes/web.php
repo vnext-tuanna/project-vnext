@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\RequestController;
 use App\Http\Controllers\admin\SkillController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\SendMailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.login'], function () {
     Route::resource('divisions', DivisionController::class);
     Route::resource('positions', PositionController::class);
     Route::resource('skills', SkillController::class);
+    Route::get('send-mail', [SendMailController::class, 'create']);
+    Route::post('send-mail', [SendMailController::class, 'store']);
 });
 
 ##### LOGIN-LOGOUT #############
