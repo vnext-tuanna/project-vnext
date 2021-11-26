@@ -42,8 +42,8 @@ class SendMailNotify extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject('Report System')
-            ->line('Title: ' . $this->mailNoti['title'])
-            ->line('Content: ' . $this->mailNoti['body'])
+            ->line($this->mailNoti['title'])
+            ->line($this->mailNoti['body'])
             ->action($this->mailNoti['mailText'], $this->mailNoti['url'])
             ->line($this->mailNoti['footer']);
     }

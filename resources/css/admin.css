@@ -195,6 +195,7 @@ nav .sidebar-button i{
 .disable{
   display: none;
 }
+
 /* Responsive Media Query */
 @media (max-width: 1240px) {
   .sidebar{

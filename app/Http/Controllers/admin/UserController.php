@@ -60,10 +60,12 @@ class UserController extends Controller
         if ($userInfo['role'] == 3) {
             $userService = $this->userService->storeUser($userInfo);
             $userService->skills()->attach($request->skill);
+            smilify('success', 'Created Successfully!');
             return redirect('admin/users');
         } else {
             $managerService = $this->managerService->storeManager($userInfo);
             $managerService->skills()->attach($request->skill);
+            smilify('success', 'Created Successfully!');
             return redirect('admin/managers');
         }
     }
@@ -89,18 +91,20 @@ class UserController extends Controller
         if ($request->role == 3) {
             $userService->update($data);
             $userService->skills()->sync($request->skill);
-
+            smilify('success', 'The user has been updated successfully.');
             return redirect('/admin/users');
         } else {
             $managerService = $this->managerService->storeManager($data);
             $managerService->skills()->attach($request->skill);
             $this->userService->delete($id);
+            smilify('success', 'The user has been updated successfully.');
             return redirect('admin/users');
         }
     }
     public function destroy($id)
     {
         $this->userService->delete($id);
+        notify()->success('Deleted Successfully!');
         return redirect('admin/users');
     }
 }

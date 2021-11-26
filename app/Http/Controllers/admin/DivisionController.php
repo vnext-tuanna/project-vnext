@@ -44,6 +44,7 @@ class DivisionController extends Controller
     public function store(Request $request)
     {
         $this->divisionService->store($request->all());
+        smilify('success', 'Created Successfully!');
         return redirect('admin/divisions');
     }
 
@@ -92,6 +93,7 @@ class DivisionController extends Controller
     public function destroy($id)
     {
         $this->divisionService->delete($id);
+        smilify('success', 'Deleted Successfully!');
         return redirect('admin/divisions');
     }
 }

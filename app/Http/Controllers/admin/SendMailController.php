@@ -27,6 +27,7 @@ class SendMailController extends Controller
             'footer' => 'Thanks you',
         ];
         Notification::send($users, new SendMailNotify($mailNoti));
-        return redirect()->back()->with('message', 'Send Email Success');
+        smilify('success', 'Sending Mail Successfully!');
+        return redirect()->back();
     }
 }
